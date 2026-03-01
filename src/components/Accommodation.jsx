@@ -20,7 +20,7 @@ const Accommodation = () => {
         const fetchRooms = async () => {
             try {
                 setLoading(true);
-                const response = await fetch(`https://eco-resort-server.onrender.com/api/rooms`);
+                const response = await fetch(`https://eco-resort-server.onrender.com/api/cottages`);
                 
                 if (!response.ok) throw new Error('Failed to fetch accommodations');
                 

@@ -36,7 +36,7 @@ const RoomDetails = () => {
             try {
                 setLoading(true);
                 setError(null);
-                const res = await axios.get(`https://eco-resort-server.onrender.com/api/rooms/${id}`);
+                const res = await axios.get(`https://eco-resort-server.onrender.com/api/cottages/${id}`);
                 setCottage(res.data);
                 if (res.data.images && res.data.images.length > 0) {
                     setMainImage(res.data.images[0]);

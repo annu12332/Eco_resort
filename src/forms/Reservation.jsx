@@ -28,7 +28,7 @@ const ReservationForm = ({ onClose }) => {
     useEffect(() => {
         const fetchRooms = async () => {
             try {
-                const res = await axios.get('https://eco-resort-server.onrender.com/api/rooms');
+                const res = await axios.get('https://eco-resort-server.onrender.com/api/cottages');
                 // রুমের টাইটেলগুলো ডুপ্লিকেট রিমুভ করে ইউনিক লিস্ট তৈরি
                 const uniqueRooms = [...new Set(res.data.map(room => room.title))];
                 setAvailableRooms(uniqueRooms);

@@ -72,13 +72,13 @@ const HeroSection = () => {
                                 Reconnect in the heart of the jungle.
                             </p>
                             <div className="flex flex-wrap justify-center lg:justify-start gap-4 pt-4">
-                                <Link to={"/booking"}>
+                                <Link to={"/reservation"}>
                                     {/* LIGHT THEME BUTTONS */}
                                     <button className="bg-emerald-700 text-white px-10 py-4 text-xs font-bold uppercase tracking-widest hover:bg-stone-950 transition-all rounded-full shadow-lg shadow-emerald-500/20">
                                         Book Journey
                                     </button>
                                 </Link>
-                                <Link to={'/activities'}>
+                                <Link to={'/rooms'}>
                                     <button className="border border-stone-300 text-stone-900 px-10 py-4 text-xs font-bold uppercase tracking-widest hover:bg-stone-950 hover:text-white transition-all rounded-full backdrop-blur-sm">
                                         Our Cottages
                                     </button>

@@ -38,7 +38,7 @@ const AdminDashboard = () => {
         const fetchDashboardData = async () => {
             try {
                 // প্রতিটি এপিআই কল আলাদাভাবে করা হচ্ছে এবং এরর হ্যান্ডেল করা হয়েছে 
-                const roomsReq = axios.get('https://eco-resort-server.onrender.com/api/rooms').catch(e => ({ data: [] }));
+                const roomsReq = axios.get('https://eco-resort-server.onrender.com/api/cottages').catch(e => ({ data: [] }));
                 const bookingsReq = axios.get('https://eco-resort-server.onrender.com/api/bookings').catch(e => ({ data: [] }));
                 const packagesReq = axios.get('https://eco-resort-server.onrender.com/api/packages').catch(e => ({ data: [] }));
 

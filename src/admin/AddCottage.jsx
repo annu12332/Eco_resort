@@ -83,7 +83,7 @@ const AddCottageForm = () => {
                 maxOccupancy: { adults: Number(formData.adults), children: Number(formData.children) } 
             };
 
-            const response = await axios.post('https://eco-resort-server.onrender.com/api/rooms', finalCottageData);
+            const response = await axios.post('https://eco-resort-server.onrender.com/api/cottages', finalCottageData);
 
             if (response.status === 201) {
                 setIsSuccess(true);
