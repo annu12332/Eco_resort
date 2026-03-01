@@ -2,13 +2,13 @@ import { initializeApp } from "firebase/app";
 import { getAuth } from "firebase/auth";
 
 const firebaseConfig = {
-  apiKey: "AIzaSyBtnwP7WICgg0XrvP8PausdN0Ydy_SO9ds",
-  authDomain: "hotel-a8945.firebaseapp.com",
-  projectId: "hotel-a8945",
-  storageBucket: "hotel-a8945.firebasestorage.app",
-  messagingSenderId: "735496938454",
-  appId: "1:735496938454:web:101923b7ff1bc488553a77",
-  measurementId: "G-9RBRXYC2HM"
+  apiKey: "AIzaSyD0hof8xTEaUqwzE-8ZZ6HjN2FvVmRJi84",
+  authDomain: "eco-resort-c5e8a.firebaseapp.com",
+  projectId: "eco-resort-c5e8a",
+  storageBucket: "eco-resort-c5e8a.firebasestorage.app",
+  messagingSenderId: "263408484786",
+  appId: "1:263408484786:web:fccaac2bf0fda7bf2e24ab",
+  measurementId: "G-LLWQ846M5W"
 };
 
 // Initialize Firebase
