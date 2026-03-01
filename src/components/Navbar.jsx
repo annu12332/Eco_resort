@@ -41,12 +41,11 @@ const Navbar = () => {
 
             {/* Main Navbar */}
             <nav
-                className={`fixed w-full z-50 transition-all duration-500 ease-in-out top-6 md:top-6 ${scrolled
-                    ? 'bg-white/95 backdrop-blur-md py-3 shadow-md border-b border-stone-200'
-                    : 'bg-transparent py-6'
-                    }`}
+                className={`fixed w-full z-50 transition-all duration-500 ease-in-out 
+                    ${scrolled ? 'bg-white/95 backdrop-blur-md py-2 shadow-md border-b border-stone-200' : 'bg-transparent py-3'}
+                    top-0 md:top-6`}
             >
-                <div className="max-w-7xl mx-auto px-6 flex justify-between items-center relative z-50">
+                <div className="max-w-7xl mx-auto px-4 sm:px-6 flex justify-between items-center relative z-50">
                     {/* Logo */}
                     <motion.div
                         initial={{ opacity: 0, y: -10 }}
@@ -54,10 +53,10 @@ const Navbar = () => {
                         className="flex flex-col items-center lg:items-start"
                     >
                         <Link to="/" className="flex flex-col items-center lg:items-start">
-                            <h1 className="text-2xl md:text-3xl lg:text-3xl font-serif tracking-widest uppercase cursor-pointer text-stone-900">
+                            <h1 className="text-xl sm:text-2xl md:text-3xl lg:text-3xl font-serif tracking-widest uppercase cursor-pointer text-stone-900">
                                 Almaris <span className="text-emerald-600 font-bold">Eco</span>
                             </h1>
-                            <div className="flex gap-1 mt-1 text-emerald-600 text-[10px] md:text-[11px] lg:text-xs">
+                            <div className="flex gap-1 mt-1 text-emerald-600 text-[9px] sm:text-[10px] md:text-[11px] lg:text-xs">
                                 {[...Array(5)].map((_, i) => (
                                     <FaLeaf key={i} />
                                 ))}
@@ -93,7 +92,7 @@ const Navbar = () => {
                             <motion.button
                                 whileHover={{ scale: 1.05 }}
                                 whileTap={{ scale: 0.95 }}
-                                className="border-2 border-emerald-600 px-6 py-2.5 text-sm text-emerald-700 uppercase tracking-wider hover:bg-emerald-600 hover:text-white transition-all duration-300 rounded-full font-semibold"
+                                className="border-2 border-emerald-600 px-5 py-2 text-sm text-emerald-700 uppercase tracking-wider hover:bg-emerald-600 hover:text-white transition-all duration-300 rounded-full font-semibold"
                             >
                                 Book Now
                             </motion.button>
@@ -126,7 +125,7 @@ const Navbar = () => {
                                 animate={{ x: 0 }}
                                 exit={{ x: '100%' }}
                                 transition={{ type: 'spring', damping: 25, stiffness: 200 }}
-                                className="fixed right-0 top-0 h-screen w-[80%] bg-white/95 backdrop-blur-lg z-60 flex flex-col items-center justify-center space-y-8 shadow-2xl"
+                                className="fixed right-0 top-0 h-screen w-[80%] bg-white/95 backdrop-blur-lg z-60 flex flex-col items-center justify-center space-y-6 shadow-2xl"
                             >
                                 {navLinks.map((link, index) => (
                                     <motion.div
@@ -138,7 +137,7 @@ const Navbar = () => {
                                         <Link
                                             to={link.href}
                                             onClick={() => setIsOpen(false)}
-                                            className="text-stone-900 text-lg font-medium tracking-wide uppercase hover:text-emerald-600 transition-colors"
+                                            className="text-stone-900 text-lg sm:text-base font-medium tracking-wide uppercase hover:text-emerald-600 transition-colors"
                                         >
                                             {link.name}
                                         </Link>
@@ -146,7 +145,7 @@ const Navbar = () => {
                                 ))}
 
                                 <Link to="/reservation" onClick={() => setIsOpen(false)}>
-                                    <button className="border-2 border-emerald-600 px-8 py-3 text-emerald-700 font-bold text-sm uppercase tracking-wider hover:bg-emerald-600 hover:text-white transition-all rounded-full shadow-sm">
+                                    <button className="border-2 border-emerald-600 px-6 py-2 text-emerald-700 font-bold text-sm uppercase tracking-wider hover:bg-emerald-600 hover:text-white transition-all rounded-full shadow-sm">
                                         Book Now
                                     </button>
                                 </Link>
