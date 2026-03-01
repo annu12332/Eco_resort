@@ -16,10 +16,10 @@ const Facilities = () => {
 
     // Images to reflect jungle/eco vibe
     const images = [
-        "https://images.unsplash.com/photo-1542314838-090c377f0a10?q=80&w=800", // Eco resort view
-        "https://images.unsplash.com/photo-1596700021077-84a86b0391d1?q=80&w=500", // Tropical plants
-        "https://images.unsplash.com/photo-1510798831971-661eb04b3739?q=80&w=500", // Zen/Spa
-        "https://images.unsplash.com/photo-1519961655386-85fa3c004a25?q=80&w=500", // Cozy interior
+        "https://images.unsplash.com/photo-1760638262320-f80336f8da20?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTl8fGVjbyUyMHJlc29ydHxlbnwwfHwwfHx8MA%3D%3D", // Eco resort view
+        "https://plus.unsplash.com/premium_photo-1682285210821-5d1b5a406b97?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTd8fGVjbyUyMHJlc29ydHxlbnwwfHwwfHx8MA%3D%3D", // Tropical plants
+        "https://images.unsplash.com/photo-1760942994028-faea27e67045?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTh8fGVjbyUyMHJlc29ydHxlbnwwfHwwfHx8MA%3D%3D", // Zen/Spa
+        "https://images.unsplash.com/photo-1760942994028-faea27e67045?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTh8fGVjbyUyMHJlc29ydHxlbnwwfHwwfHx8MA%3D%3D", // Cozy interior
     ];
 
     return (

@@ -1,48 +1,45 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
-import { ArrowRight, Sparkles } from 'lucide-react';
+import { ArrowRight, Sparkles, Loader2 } from 'lucide-react';
 import { Link } from 'react-router-dom';
+import axios from 'axios';
 
 const Activities = () => {
-    // Extended list for a "page" feel
-    const allActivities = [
-        {
-            title: "Sunrise Yoga",
-            desc: "Find balance in our open-air pavilion overlooking the mist.",
-            image: "https://images.unsplash.com/photo-1545205597-3d9d02c29597?q=80&w=800",
-            span: "md:col-span-2"
-        },
-        {
-            title: "Jungle Trekking",
-            desc: "Guided tours through pristine trails.",
-            image: "https://images.unsplash.com/photo-1549887552-670732859942?q=80&w=500",
-            span: "md:col-span-1"
-        },
-        {
-            title: "River Kayaking",
-            desc: "Paddle through crystal clear waters.",
-            image: "https://images.unsplash.com/photo-1596727004313-097d8199996b?q=80&w=500",
-            span: "md:col-span-1"
-        },
-        {
-            title: "Stargazing",
-            desc: "Unmatched views of the night sky.",
-            image: "https://images.unsplash.com/photo-1532978379116-ef1f4a132915?q=80&w=800",
-            span: "md:col-span-2"
-        },
-        {
-            title: "Organic Gardening",
-            desc: "Learn sustainable farming techniques.",
-            image: "https://images.unsplash.com/photo-1592963177303-6f3458cd0182?q=80&w=500",
-            span: "md:col-span-1"
-        },
-        {
-            title: "Spa Rituals",
-            desc: "Organic treatments using local herbs.",
-            image: "https://images.unsplash.com/photo-1540555700478-4be289f8c119?q=80&w=500",
-            span: "md:col-span-1"
-        }
-    ];
+    // 1. ADDED: State to manage activities data
+    const [allActivities, setAllActivities] = useState([]);
+    const [loading, setLoading] = useState(true);
+
+    const API_URL = import.meta.env.VITE_API_BASE_URL || 'https://eco-resort-server.onrender.com';
+
+    // 2. ADDED: Fetch data from backend
+    useEffect(() => {
+        const fetchActivities = async () => {
+            try {
+                const res = await axios.get(`${API_URL}/api/activities`);
+                // Backend data mapping to match UI structure
+                const formattedData = res.data.map((act, index) => ({
+                    title: act.title,
+                    desc: act.description,
+                    image: act.image,
+                    // Dynamic span for layout (alternating grid)
+                    span: index % 3 === 0 ? "md:col-span-2" : "md:col-span-1"
+                }));
+                setAllActivities(formattedData);
+                setLoading(false);
+            } catch (err) {
+                console.error("Error fetching activities:", err);
+                setLoading(false);
+            }
+        };
+
+        fetchActivities();
+    }, [API_URL]);
+
+    if (loading) return (
+        <div className="h-96 flex items-center justify-center">
+            <Loader2 className="animate-spin text-emerald-500" size={40} />
+        </div>
+    );
 
     return (
         <section className="py-24 bg-transparent px-6 overflow-hidden">
@@ -82,7 +79,7 @@ const Activities = () => {
 
                 {/* --- Activities Grid --- */}
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-16">
-                    {allActivities.map((activity, index) => (
+                    {allActivities.slice(0, 4).map((activity, index) => (
                         <motion.div
                             key={index}
                             initial={{ opacity: 0, y: 30 }}
@@ -115,7 +112,7 @@ const Activities = () => {
                 </div>
 
                 {/* --- CTA Button --- */}
-               <Link to={'/activities'}> <div className="text-center">
+                <Link to={'/activities'} className="text-center block">
                     <motion.button
                         whileHover={{ scale: 1.05 }}
                         whileTap={{ scale: 0.95 }}
@@ -124,7 +121,7 @@ const Activities = () => {
                         View All Activities
                         <ArrowRight size={18} className="group-hover:translate-x-1 transition-transform" />
                     </motion.button>
-                </div></Link>
+                </Link>
             </div>
         </section>
     );

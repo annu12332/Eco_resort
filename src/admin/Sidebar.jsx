@@ -1,11 +1,12 @@
 import React from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { 
-    LayoutDashboard, PlusCircle, Hotel, LogOut, 
-    CalendarCheck, Image as ImageIcon, X, Tag, FileText, Package, Leaf
+import {
+    LayoutDashboard, PlusCircle, Hotel, LogOut,
+    CalendarCheck, Image as ImageIcon, X, Tag, FileText, Package, Leaf,
+    Zap // 1. UPDATED: Imported Zap icon for activities
 } from 'lucide-react';
 import { signOut } from 'firebase/auth';
-import { auth } from '../firebase.config'; 
+import { auth } from '../firebase.config';
 import { useNavigate } from 'react-router-dom';
 
 export const Sidebar = ({ activeTab, setActiveTab, isSidebarOpen, setIsSidebarOpen }) => {
@@ -20,6 +21,8 @@ export const Sidebar = ({ activeTab, setActiveTab, isSidebarOpen, setIsSidebarOp
         { id: 'manage-packages', name: 'Manage Packages', icon: <Package size={20} /> },
         { id: 'manage-blogs', name: 'Manage Blogs', icon: <FileText size={20} /> },
         { id: 'manage-gallery', name: 'Gallery', icon: <ImageIcon size={20} /> },
+        // 2. UPDATED: Updated icon and fixed typo ("Activities")
+        { id: 'manage-activities', name: 'Activities', icon: <Zap size={20} /> }, 
     ];
 
     const handleLogout = async () => {
@@ -37,7 +40,7 @@ export const Sidebar = ({ activeTab, setActiveTab, isSidebarOpen, setIsSidebarOp
         // Theme updated to Dark Slate + Emerald Highlights
         <div className="h-screen w-64 bg-[#1C2431] text-stone-100 p-5 flex flex-col relative border-r border-stone-800 shadow-2xl overflow-y-auto custom-scrollbar">
             {/* Close Button - Mobile Only */}
-            <button 
+            <button
                 onClick={() => setIsSidebarOpen(false)}
                 className="md:hidden absolute top-5 right-4 p-2 bg-stone-800 hover:bg-stone-700 rounded-full text-stone-400"
             >
@@ -64,11 +67,10 @@ export const Sidebar = ({ activeTab, setActiveTab, isSidebarOpen, setIsSidebarOp
                             setActiveTab(item.id);
                             if (window.innerWidth < 768) setIsSidebarOpen(false);
                         }}
-                        className={`w-full flex items-center gap-4 px-4 py-3.5 rounded-xl transition-all font-medium text-sm ${
-                            activeTab === item.id
+                        className={`w-full flex items-center gap-4 px-4 py-3.5 rounded-xl transition-all font-medium text-sm ${activeTab === item.id
                                 ? 'bg-emerald-600 text-white shadow-lg shadow-emerald-600/30 font-semibold'
                                 : 'text-stone-300 hover:bg-stone-800 hover:text-white'
-                        }`}
+                            }`}
                     >
                         {item.icon}
                         <span>{item.name}</span>
@@ -98,7 +100,7 @@ export const Sidebar = ({ activeTab, setActiveTab, isSidebarOpen, setIsSidebarOp
                 {isSidebarOpen && (
                     <div className="fixed inset-0 z-[100] md:hidden">
                         {/* Overlay */}
-                        <motion.div 
+                        <motion.div
                             initial={{ opacity: 0 }}
                             animate={{ opacity: 1 }}
                             exit={{ opacity: 0 }}

@@ -8,9 +8,9 @@ import ManageGallery from './ManageGallery';
 import ManageOffers from './ManageOffers'; 
 import ManageBlogs from './ManageBlogs'; 
 import ManagePackages from './ManagePackages'; 
-// Updated Icons for Eco-theme
 import { Menu, Trees, Calendar, DollarSign, Bell, Leaf, Package } from 'lucide-react';
 import axios from 'axios';
+import AddActivities from './AddActivities';
 
 const AdminDashboard = () => {
     const [activeTab, setActiveTab] = useState('stats');
@@ -31,7 +31,8 @@ const AdminDashboard = () => {
         'manage-gallery': 'Gallery Management',
         'manage-offers': 'Promotions & Offers',
         'manage-blogs': 'Editorial & Blogs',
-        'manage-packages': 'Exclusive Packages'
+        'manage-packages': 'Exclusive Packages',
+        'manage-activities': 'Activity Management' 
     };
 
     useEffect(() => {
@@ -149,6 +150,8 @@ const AdminDashboard = () => {
                                 {activeTab === 'manage-offers' && <ManageOffers />}
                                 {activeTab === 'manage-blogs' && <ManageBlogs />}
                                 {activeTab === 'manage-packages' && <ManagePackages />}
+                                {/* 3. ADDED: Tab condition for Activities */}
+                                {activeTab === 'manage-activities' && <AddActivities />}
 
                                 {activeTab === 'stats' && (
                                     <div className="space-y-8">

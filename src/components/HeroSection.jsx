@@ -39,22 +39,7 @@ const HeroSection = () => {
             {/* Content Layer */}
             <div className="relative z-10 flex flex-col min-h-screen">
 
-                {/* --- 1. Top Informational Bar - Light Theme --- */}
-                <div className={`hidden lg:block border-b border-stone-200 py-3 transition-all duration-500 ${scrolled ? 'opacity-0' : 'opacity-100'} bg-white/60 backdrop-blur-sm`}>
-                    <div className="container mx-auto px-6 flex justify-between items-center text-xs text-stone-600 tracking-widest uppercase font-medium">
-                        <div className="flex gap-8">
-                            <span className="flex items-center gap-2"><FaMapMarkerAlt className="text-emerald-700" /> Sreemangal</span>
-                            <span className="flex items-center gap-2"><FaPhoneAlt className="text-emerald-700" /> +880 123 456 7890</span>
-                            <span className="flex items-center gap-2"><FaEnvelope className="text-emerald-700" /> hello@eco.com</span>
-                        </div>
-                        <div className="flex gap-5 items-center text-emerald-700">
-                            <FaFacebookF className="hover:text-emerald-900 cursor-pointer" />
-                            <FaInstagram className="hover:text-emerald-900 cursor-pointer" />
-                            <FaTwitter className="hover:text-emerald-900 cursor-pointer" />
-                        </div>
-                    </div>
-                </div>
-
+               
                 {/* --- 2. Main Body Content --- */}
                 <div className="flex-grow flex items-center py-10">
                     <div className="container mx-auto px-6 grid lg:grid-cols-12 gap-10 items-center">
@@ -78,7 +63,7 @@ const HeroSection = () => {
                                         Book Journey
                                     </button>
                                 </Link>
-                                <Link to={'/rooms'}>
+                                <Link to={'/all-rooms'}>
                                     <button className="border border-stone-300 text-stone-900 px-10 py-4 text-xs font-bold uppercase tracking-widest hover:bg-stone-950 hover:text-white transition-all rounded-full backdrop-blur-sm">
                                         Our Cottages
                                     </button>

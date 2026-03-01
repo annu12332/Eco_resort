@@ -11,6 +11,7 @@ const RoomDetails = () => {
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
     
+    // মেইন ইমেজ স্টেট
     const [mainImage, setMainImage] = useState('');
 
     const [bookingData, setBookingData] = useState({
@@ -38,10 +39,11 @@ const RoomDetails = () => {
                 setError(null);
                 const res = await axios.get(`https://eco-resort-server.onrender.com/api/cottages/${id}`);
                 setCottage(res.data);
-                if (res.data.images && res.data.images.length > 0) {
-                    setMainImage(res.data.images[0]);
-                } else if (res.data.image) {
-                    setMainImage(res.data.image);
+                
+                // --- UPDATED IMAGE FETCHING LOGIC ---
+                // ডাটাবেসে 'image' হলো অ্যারে ( [String] )
+                if (res.data.image && res.data.image.length > 0) {
+                    setMainImage(res.data.image[0]); // প্রথম ছবিটি মেইন হিসেবে সেট করুন
                 }
             } catch (err) {
                 console.error("Error fetching cottage:", err);
@@ -126,9 +128,11 @@ const RoomDetails = () => {
                             </span>
                         </div>
                         
-                        {cottage.images && cottage.images.length > 1 && (
+                        {/* --- UPDATED THUMBNAIL RENDERING --- */}
+                        {/* 'cottage.image' (অ্যারে) ব্যবহার করুন, 'images' নয় */}
+                        {cottage.image && cottage.image.length > 1 && (
                             <div className="grid grid-cols-4 md:grid-cols-6 gap-3 mb-8">
-                                {cottage.images.map((img, index) => (
+                                {cottage.image.map((img, index) => (
                                     <button 
                                         key={index} 
                                         onClick={() => setMainImage(img)}

@@ -1,9 +1,9 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { FaTree, FaWater } from 'react-icons/fa';
+import { Link } from 'react-router-dom';
 
 const Banner = () => {
-  // নিশ্চিত করুন এই লিঙ্কগুলো সরাসরি ইমেজ ফাইল নির্দেশ করছে
   const images = [
     "https://images.unsplash.com/photo-1529419412599-7bb870e11810?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTF8fG5hdHVyZXxlbnwwfHwwfHx8MA%3D%3D", // Center
     "https://images.unsplash.com/photo-1426604966848-d7adac402bff?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTh8fG5hdHVyZXxlbnwwfHwwfHx8MA%3D%3D", // Top right
@@ -12,7 +12,6 @@ const Banner = () => {
     "https://media.istockphoto.com/id/2231002213/photo/early-morning-on-tea-plantation-nuwara-eliya-ceylon.webp?a=1&b=1&s=612x612&w=0&k=20&c=6xDLC9aSNtDzOqprCRYgs06BizetQU7IZrRV6_LKnMI=", // Bottom left
   ];
 
-  // হেক্সাগন শেপের জন্য CSS Clip Path (Tailwind এর মাধ্যমে)
   const hexagonStyle = {
     clipPath: 'polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%)',
   };
@@ -55,9 +54,9 @@ const Banner = () => {
               </div>
             </div>
 
-            <button className="bg-emerald-700 text-white px-8 py-3.5 rounded-full font-semibold hover:bg-emerald-800 transition shadow-lg hover:shadow-emerald-200">
+            <Link to={'/about'}><button className="bg-emerald-700 text-white px-8 py-3.5 rounded-full font-semibold hover:bg-emerald-800 transition shadow-lg hover:shadow-emerald-200">
               Explore More
-            </button>
+            </button></Link>
           </motion.div>
 
           {/* --- Right Image Gallery (Hexagons) --- */}

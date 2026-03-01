@@ -5,16 +5,12 @@ import AOS from 'aos';
 import 'aos/dist/aos.css';
 import { FaLeaf, FaArrowRight, FaWind, FaUsers, FaBed, FaDollarSign } from 'react-icons/fa';
 
-// প্রোডাকশন লেভেলে .env ফাইল থেকে API URL নেওয়া ভালো
-const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || 'https://eco-resort-server.onrender.com';
-
 const Accommodation = () => {
     const [displayRooms, setDisplayRooms] = useState([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
 
     useEffect(() => {
-        // AOS initialization
         AOS.init({ duration: 800, once: true });
 
         const fetchRooms = async () => {
@@ -37,13 +33,11 @@ const Accommodation = () => {
         fetchRooms();
     }, []);
 
-    // Animation variants
     const cardVariants = {
         hidden: { opacity: 0, y: 30 },
         visible: { opacity: 1, y: 0, transition: { duration: 0.6, ease: "easeOut" } }
     };
 
-    // Skeleton Loader Component for Better UX
     const SkeletonCard = () => (
         <div className="bg-white rounded-3xl p-5 border border-stone-100 animate-pulse">
             <div className="rounded-2xl bg-stone-200 aspect-[16/10] mb-6"></div>
@@ -59,7 +53,6 @@ const Accommodation = () => {
 
     return (
         <section className="relative py-16 md:py-24 overflow-hidden bg-stone-50 text-stone-900">
-            {/* --- Organic Decorative Background --- */}
             <div className="absolute inset-0 z-0">
                 <div className="absolute inset-0 bg-gradient-to-b from-emerald-50/50 via-stone-50 to-stone-50"></div>
                 <div className="absolute -top-40 -left-20 w-[400px] h-[400px] bg-emerald-100 rounded-full blur-[120px] opacity-40"></div>
@@ -67,8 +60,6 @@ const Accommodation = () => {
             </div>
             
             <div className="relative z-10 container mx-auto px-6 md:px-12 lg:px-20">
-                
-                {/* --- Section Header --- */}
                 <div className="text-center mb-16" data-aos="fade-up">
                     <div className="flex items-center justify-center gap-3 mb-3">
                         <span className="h-px w-8 bg-emerald-700/30"></span>
@@ -87,7 +78,6 @@ const Accommodation = () => {
                     </p>
                 </div>
 
-                {/* --- Room Grid & Error/Loading States --- */}
                 {loading ? (
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-6 lg:gap-8">
                         {[...Array(4)].map((_, i) => <SkeletonCard key={i} />)}
@@ -110,16 +100,15 @@ const Accommodation = () => {
                                 whileHover={{ y: -8, boxShadow: "0 20px 40px -15px rgba(0, 0, 0, 0.1)" }}
                                 className="group relative bg-white rounded-3xl p-5 shadow-lg shadow-stone-200/50 border border-stone-100 flex flex-col transition-all duration-300"
                             >
-                                {/* --- Card Top: Image --- */}
                                 <div className="relative rounded-2xl overflow-hidden aspect-[16/10] mb-6">
+                                    {/* --- UPDATED IMAGE RENDERING --- */}
                                     <img 
-                                        src={room.image || room.thumbnail} 
-                                        alt={room.type} 
+                                        src={room.image && room.image.length > 0 ? room.image[0] : '/placeholder.jpg'} // প্রথম ছবিটি ব্যবহার করুন
+                                        alt={room.title} 
                                         className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
                                         loading="lazy"
                                     />
                                     
-                                    {/* Price Badge */}
                                     <div className="absolute top-4 left-4 bg-white/60 backdrop-blur-md border border-white/30 px-4 py-2 rounded-xl shadow-inner">
                                         <div className="text-stone-950 text-lg md:text-xl font-serif flex items-center gap-1">
                                             <FaDollarSign size={14} className="text-emerald-700" />
@@ -128,7 +117,6 @@ const Accommodation = () => {
                                     </div>
                                 </div>
 
-                                {/* --- Card Bottom: Info --- */}
                                 <div className="flex-1 flex flex-col">
                                     <div className="flex justify-between items-center mb-3">
                                         <div className="bg-emerald-50 text-emerald-800 text-[9px] uppercase tracking-[0.2em] font-bold px-3 py-1 rounded-full">
@@ -140,18 +128,18 @@ const Accommodation = () => {
                                     </div>
                                     
                                     <h3 className="text-stone-950 text-2xl font-serif tracking-tight mb-2 group-hover:text-emerald-700 transition-colors">
-                                        {room.type}
+                                        {room.title}
                                     </h3>
                                     
                                     <p className="text-stone-600 text-sm leading-relaxed font-light mb-6 flex-1 line-clamp-2">
                                         {room.description}
                                     </p>
 
-                                    {/* --- Detailed Info: Capacity & Bed --- */}
                                     <div className="flex items-center gap-6 pb-6 border-b border-stone-100 mb-6 text-stone-500 text-xs font-medium">
                                         <div className="flex items-center gap-2">
                                             <FaUsers className="text-emerald-600" />
-                                            <span>Up to {room.maxOccupancy?.adults + room.maxOccupancy?.children || '2'} Guests</span>
+                                            {/* 'maxOccupancy' এর ডাটা স্ট্রাকচার চেক করুন, এখানে room.maxOccupancy?.adults ব্যবহার করা হয়েছে */}
+                                            <span>Up to {(room.maxOccupancy?.adults || 0) + (room.maxOccupancy?.children || 0)} Guests</span>
                                         </div>
                                         <div className="flex items-center gap-2">
                                             <FaBed className="text-emerald-600" />
@@ -172,7 +160,6 @@ const Accommodation = () => {
                     </div>
                 )}
 
-                {/* --- Footer CTA --- */}
                 <div className="mt-20 text-center" data-aos="fade-up">
                     <Link 
                         to="/all-rooms" 
