@@ -10,7 +10,7 @@ const BlogDetails = () => {
     const [blog, setBlog] = useState(null);
     const [loading, setLoading] = useState(true);
 
-    const API_URL = `https://hotel-server-qryr.onrender.com/api/blogs/${id}`;
+    const API_URL = `https://eco-resort-server.onrender.com/api/blogs/${id}`;
 
     useEffect(() => {
         const fetchBlogDetails = async () => {

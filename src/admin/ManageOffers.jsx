@@ -17,7 +17,7 @@ const ManageOffers = () => {
 
     const fetchOffers = async () => {
         try {
-            const res = await axios.get('https://hotel-server-qryr.onrender.com/api/offers');
+            const res = await axios.get('https://eco-resort-server.onrender.com/api/offers');
             setOffers(res.data);
             setLoading(false);
         } catch (err) { console.error(err); }
@@ -59,7 +59,7 @@ const ManageOffers = () => {
             return;
         }
         try {
-            await axios.post('https://hotel-server-qryr.onrender.com/api/offers', formData);
+            await axios.post('https://eco-resort-server.onrender.com/api/offers', formData);
             alert("Offer added successfully!");
             setFormData({ title: '', description: '', price: '', validity: '', imageUrl: '', discount: '' });
             fetchOffers();
@@ -68,7 +68,7 @@ const ManageOffers = () => {
 
     const deleteOffer = async (id) => {
         if (window.confirm("Delete this offer?")) {
-            await axios.delete(`https://hotel-server-qryr.onrender.com/api/offers/${id}`);
+            await axios.delete(`https://eco-resort-server.onrender.com/api/offers/${id}`);
             fetchOffers();
         }
     };

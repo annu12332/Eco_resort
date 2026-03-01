@@ -17,6 +17,7 @@ import ScrollToTop from './components/ScrollToTop';
 import Gallery from './components/Gallery';
 
 // Pages
+import AdminDashboard from './admin/AdminDashboard'
 import RoomDetails from './pages/RoomDetails';
 import AllRooms from './pages/AllRooms';
 import ReservationForm from './forms/Reservation';
@@ -25,12 +26,13 @@ import AllPhotos from './pages/AllPhotos';
 import Offers from './pages/Offers';
 import OfferDetails from './pages/OffersDetails';
 import Login from './admin/Login';
-import { AdminDashboard } from './admin/AdminDashboard';
 import BlogPage from './pages/BlogPage';
 import BlogDetails from './pages/BlogDetails';
 import PackageDetails from './pages/PackageDetails';
 import PackagesPage from './pages/PackagePage';
 import Experience from './components/Experience';
+import ActivitiesPage from './pages/Activities';
+
 
 function App() {
   const [user, setUser] = useState(null);
@@ -80,7 +82,7 @@ function App() {
               <HeroSection />
               <Banner />
               <Accommodation />
-              <Experience/>
+              <Experience />
               <Facilities />
               <ExtraFacilities />
               <BookingBar />
@@ -95,6 +97,8 @@ function App() {
           <Route path="/blog/:id" element={<BlogDetails />} />
           <Route path="/package/:id" element={<PackageDetails />} />
           <Route path="/packages" element={<PackagesPage />} />
+          <Route path="/activities" element={<ActivitiesPage />} />
+
 
 
           <Route path="/gallery" element={<AllPhotos />} />

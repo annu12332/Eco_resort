@@ -10,13 +10,13 @@ const PackageDetails = () => {
     const [formData, setFormData] = useState({ userName: '', email: '', phone: '', checkIn: '', guests: 1 });
 
     useEffect(() => {
-        axios.get(`https://hotel-server-qryr.onrender.com/api/packages/${id}`).then(res => setPkg(res.data));
+        axios.get(`https://eco-resort-server.onrender.com/api/packages/${id}`).then(res => setPkg(res.data));
     }, [id]);
 
     const handleBooking = async (e) => {
         e.preventDefault();
         try {
-            await axios.post('https://hotel-server-qryr.onrender.com/api/bookings', { ...formData, packageId: id });
+            await axios.post('https://eco-resort-server.onrender.com/api/bookings', { ...formData, packageId: id });
             // LIGHT THEME: Swal updated
             Swal.fire({ 
                 icon: 'success', 

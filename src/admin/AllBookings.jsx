@@ -10,7 +10,7 @@ const AllBookings = () => {
     const [expandedId, setExpandedId] = useState(null);
 
     // API Base URL
-    const API_URL = 'https://hotel-server-qryr.onrender.com/api/bookings';
+    const API_URL = 'https://eco-resort-server.onrender.com/api/bookings';
 
     useEffect(() => {
         fetchBookings();

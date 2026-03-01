@@ -9,7 +9,7 @@ const BlogPage = () => {
     const [loading, setLoading] = useState(true);
     const [searchTerm, setSearchTerm] = useState("");
 
-    const API_URL = 'https://hotel-server-qryr.onrender.com/api/blogs';
+    const API_URL = 'https://eco-resort-server.onrender.com/api/blogs';
 
     useEffect(() => {
         const fetchBlogs = async () => {

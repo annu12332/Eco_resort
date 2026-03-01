@@ -18,7 +18,7 @@ const ManageGallery = () => {
 
     const fetchGallery = async () => {
         try {
-            const res = await axios.get('https://hotel-server-qryr.onrender.com/api/gallery');
+            const res = await axios.get('https://eco-resort-server.onrender.com/api/gallery');
             setImages(res.data);
             setLoading(false);
         } catch (err) {
@@ -53,7 +53,7 @@ const ManageGallery = () => {
                 const directLink = response.data.data.url;
 
                 // ৩. আপনার নিজের ব্যাকএন্ডে (MongoDB) সেভ করা
-                const res = await axios.post('https://hotel-server-qryr.onrender.com/api/gallery', {
+                const res = await axios.post('https://eco-resort-server.onrender.com/api/gallery', {
                     image: directLink,
                     title: title || "Hotel Moments"
                 });
@@ -77,7 +77,7 @@ const ManageGallery = () => {
     const handleDelete = async (id) => {
         if (window.confirm("Are you sure you want to delete this photo?")) {
             try {
-                await axios.delete(`https://hotel-server-qryr.onrender.com/api/gallery/${id}`);
+                await axios.delete(`https://eco-resort-server.onrender.com/api/gallery/${id}`);
                 setImages(images.filter(img => img._id !== id));
             } catch (err) {
                 alert("Delete failed!");

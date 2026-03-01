@@ -24,11 +24,11 @@ const ReservationForm = ({ onClose }) => {
         members: '2 Adults'
     });
 
-    // ডাটাবেজ থেকে রুমগুলো নিয়ে আসা
+    // ডাটাবেজ থেকে রুমগুলো নিয়ে আসা
     useEffect(() => {
         const fetchRooms = async () => {
             try {
-                const res = await axios.get('https://hotel-server-qryr.onrender.com/api/rooms');
+                const res = await axios.get('https://eco-resort-server.onrender.com/api/rooms');
                 // রুমের টাইটেলগুলো ডুপ্লিকেট রিমুভ করে ইউনিক লিস্ট তৈরি
                 const uniqueRooms = [...new Set(res.data.map(room => room.title))];
                 setAvailableRooms(uniqueRooms);
@@ -58,7 +58,7 @@ const ReservationForm = ({ onClose }) => {
         setLoading(true);
 
         try {
-            const response = await axios.post('https://hotel-server-qryr.onrender.com/api/bookings', {
+            const response = await axios.post('https://eco-resort-server.onrender.com/api/bookings', {
                 ...formData,
                 totalPrice: 0 
             });
@@ -76,66 +76,68 @@ const ReservationForm = ({ onClose }) => {
 
     if (isSubmitted) {
         return (
-            <motion.div initial={{ opacity: 0, scale: 0.9 }} animate={{ opacity: 1, scale: 1 }} className="bg-[#0c0c0c] p-12 rounded-[2.5rem] border border-[#b59473]/30 text-center space-y-6 max-w-lg mx-auto">
+            <motion.div initial={{ opacity: 0, scale: 0.9 }} animate={{ opacity: 1, scale: 1 }} className="bg-white p-6 rounded-3xl border border-emerald-100 text-center space-y-4 max-w-sm mx-auto shadow-lg">
                 <div className="flex justify-center">
-                    <div className="bg-[#b59473]/10 p-5 rounded-full"><CheckCircle2 size={48} className="text-[#b59473]" /></div>
+                    <div className="bg-emerald-50 p-4 rounded-full"><CheckCircle2 size={32} className="text-emerald-700" /></div>
                 </div>
-                <h2 className="text-white text-3xl font-serif italic">Request Received</h2>
-                <p className="text-gray-400 text-sm leading-relaxed uppercase tracking-widest">
-                    Thank you <span className="text-white">{formData.guestName}</span>. We've received your request for the <span className="text-[#b59473]">{formData.roomTitle}</span>.
+                <h2 className="text-stone-900 text-xl font-serif italic">Request Received</h2>
+                <p className="text-stone-600 text-xs leading-relaxed uppercase tracking-wider">
+                    Thank you <span className="text-stone-950 font-bold">{formData.guestName}</span>. 
                 </p>
-                <button onClick={() => onClose ? onClose() : window.location.reload()} className="text-[#b59473] text-[10px] font-bold uppercase tracking-[0.4em] border-b border-[#b59473]/30 pb-1">Dismiss</button>
+                <button onClick={() => onClose ? onClose() : window.location.reload()} className="text-emerald-700 text-[10px] font-bold uppercase tracking-[0.2em] border-b border-emerald-300 pb-1">Dismiss</button>
             </motion.div>
         );
     }
 
     return (
-        <div className="max-w-4xl mx-auto">
-            <div className="flex justify-between mb-10 px-10">
+        <div className="max-w-lg mx-auto p-2">
+            {/* Compact Step Tracker */}
+            <div className="flex justify-between mb-6 px-4">
                 {[1, 2, 3].map((num) => (
-                    <div key={num} className="flex flex-col items-center gap-2">
-                        <div className={`h-[2px] w-16 rounded-full transition-all duration-700 ${step >= num ? 'bg-[#b59473]' : 'bg-white/10'}`} />
-                        <span className={`text-[8px] uppercase tracking-[0.2em] font-bold ${step >= num ? 'text-[#b59473]' : 'text-gray-600'}`}>Step 0{num}</span>
+                    <div key={num} className="flex flex-col items-center gap-1">
+                        <div className={`h-[2px] w-12 rounded-full transition-all duration-700 ${step >= num ? 'bg-emerald-600' : 'bg-stone-200'}`} />
+                        <span className={`text-[8px] uppercase tracking-[0.1em] font-bold ${step >= num ? 'text-emerald-700' : 'text-stone-400'}`}>0{num}</span>
                     </div>
                 ))}
             </div>
 
-            <form onSubmit={handleSubmit} className="bg-white/[0.02] backdrop-blur-3xl border border-white/5 rounded-[3rem] p-8 md:p-14 relative shadow-2xl">
+            {/* Compact Form Container */}
+            <form onSubmit={handleSubmit} className="bg-white border border-stone-100 rounded-3xl p-5 md:p-6 relative shadow-xl">
                 <AnimatePresence mode="wait">
                     {step === 1 && (
-                        <motion.div key="step1" initial={{ x: 15, opacity: 0 }} animate={{ x: 0, opacity: 1 }} exit={{ x: -15, opacity: 0 }} className="space-y-8">
+                        <motion.div key="step1" initial={{ x: 10, opacity: 0 }} animate={{ x: 0, opacity: 1 }} exit={{ x: -10, opacity: 0 }} className="space-y-4">
                             <div>
-                                <span className="text-[#b59473] text-[10px] uppercase tracking-[0.5em] font-bold">Inquiry</span>
-                                <h3 className="text-white text-4xl font-serif mt-2 italic">Choose Your Suite</h3>
+                                <span className="text-emerald-700 text-[9px] uppercase tracking-[0.3em] font-bold">Inquiry</span>
+                                <h3 className="text-stone-900 text-2xl font-serif mt-1 italic">Choose Suite</h3>
                             </div>
                             
-                            <div className="space-y-6">
-                                <div className="space-y-3">
-                                    <label className="flex items-center gap-3 text-[9px] uppercase text-gray-500 tracking-widest font-black ml-1">
-                                        <BedDouble size={14} className="text-[#b59473]" /> Dynamic Room Selection
+                            <div className="space-y-3">
+                                <div className="space-y-1">
+                                    <label className="flex items-center gap-2 text-[8px] uppercase text-stone-500 tracking-widest font-black ml-1">
+                                        <BedDouble size={12} className="text-emerald-700" /> Room Selection
                                     </label>
                                     <div className="relative">
                                         {fetchingRooms ? (
-                                            <div className="w-full bg-white/5 py-4 px-2 text-gray-500 text-xs animate-pulse">Loading available rooms...</div>
+                                            <div className="w-full bg-stone-50 py-2.5 px-3 text-stone-500 text-xs animate-pulse rounded-lg">Loading...</div>
                                         ) : (
-                                            <select name="roomTitle" value={formData.roomTitle} onChange={handleChange} className="w-full bg-white/5 border-b border-white/10 py-4 px-2 text-white outline-none focus:border-[#b59473] transition-all appearance-none cursor-pointer">
+                                            <select name="roomTitle" value={formData.roomTitle} onChange={handleChange} className="w-full bg-stone-50 border border-stone-100 py-2.5 px-3 text-stone-800 text-xs rounded-lg outline-none focus:border-emerald-500 transition-all appearance-none cursor-pointer">
                                                 {availableRooms.map((title, index) => (
-                                                    <option key={index} value={title} className="bg-[#111]">{title}</option>
+                                                    <option key={index} value={title} className="bg-white">{title}</option>
                                                 ))}
-                                                {availableRooms.length === 0 && <option className="bg-[#111]">No rooms available</option>}
+                                                {availableRooms.length === 0 && <option className="bg-white">No rooms available</option>}
                                             </select>
                                         )}
                                     </div>
                                 </div>
 
-                                <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-                                    <div className="space-y-3">
-                                        <label className="flex items-center gap-3 text-[9px] uppercase text-gray-500 tracking-widest font-black ml-1"><Calendar size={14} className="text-[#b59473]" /> Arrival</label>
-                                        <input required name="checkIn" value={formData.checkIn} onChange={handleChange} type="date" className="w-full bg-white/5 border-b border-white/10 py-4 px-2 text-white outline-none focus:border-[#b59473] transition-all" />
+                                <div className="grid grid-cols-2 gap-3">
+                                    <div className="space-y-1">
+                                        <label className="flex items-center gap-2 text-[8px] uppercase text-stone-500 tracking-widest font-black ml-1"><Calendar size={12} className="text-emerald-700" /> Arrival</label>
+                                        <input required name="checkIn" value={formData.checkIn} onChange={handleChange} type="date" className="w-full bg-stone-50 border border-stone-100 py-2 px-3 text-stone-800 text-xs rounded-lg outline-none focus:border-emerald-500 transition-all" />
                                     </div>
-                                    <div className="space-y-3">
-                                        <label className="flex items-center gap-3 text-[9px] uppercase text-gray-500 tracking-widest font-black ml-1"><Calendar size={14} className="text-[#b59473]" /> Departure</label>
-                                        <input required name="checkOut" value={formData.checkOut} onChange={handleChange} type="date" className="w-full bg-white/5 border-b border-white/10 py-4 px-2 text-white outline-none focus:border-[#b59473] transition-all" />
+                                    <div className="space-y-1">
+                                        <label className="flex items-center gap-2 text-[8px] uppercase text-stone-500 tracking-widest font-black ml-1"><Calendar size={12} className="text-emerald-700" /> Departure</label>
+                                        <input required name="checkOut" value={formData.checkOut} onChange={handleChange} type="date" className="w-full bg-stone-50 border border-stone-100 py-2 px-3 text-stone-800 text-xs rounded-lg outline-none focus:border-emerald-500 transition-all" />
                                     </div>
                                 </div>
                             </div>
@@ -143,63 +145,64 @@ const ReservationForm = ({ onClose }) => {
                     )}
 
                     {step === 2 && (
-                        <motion.div key="step2" initial={{ x: 15, opacity: 0 }} animate={{ x: 0, opacity: 1 }} exit={{ x: -15, opacity: 0 }} className="space-y-8">
+                        <motion.div key="step2" initial={{ x: 10, opacity: 0 }} animate={{ x: 0, opacity: 1 }} exit={{ x: -10, opacity: 0 }} className="space-y-4">
                             <div>
-                                <span className="text-[#b59473] text-[10px] uppercase tracking-[0.5em] font-bold">Guest</span>
-                                <h3 className="text-white text-4xl font-serif mt-2 italic">Who is Staying?</h3>
+                                <span className="text-emerald-700 text-[9px] uppercase tracking-[0.3em] font-bold">Guest</span>
+                                <h3 className="text-stone-900 text-2xl font-serif mt-1 italic">Who is Staying?</h3>
                             </div>
-                            <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-                                <div className="space-y-3">
-                                    <label className="flex items-center gap-3 text-[9px] uppercase text-gray-500 tracking-widest font-black ml-1"><User size={14} className="text-[#b59473]" /> Name</label>
-                                    <input required name="guestName" value={formData.guestName} onChange={handleChange} type="text" placeholder="Full Name" className="w-full bg-transparent border-b border-white/10 py-4 px-2 text-white outline-none focus:border-[#b59473]" />
+                            <div className="space-y-3">
+                                <div className="space-y-1">
+                                    <label className="flex items-center gap-2 text-[8px] uppercase text-stone-500 tracking-widest font-black ml-1"><User size={12} className="text-emerald-700" /> Name</label>
+                                    <input required name="guestName" value={formData.guestName} onChange={handleChange} type="text" placeholder="Full Name" className="w-full bg-stone-50 border border-stone-100 py-2 px-3 text-stone-800 text-xs rounded-lg outline-none focus:border-emerald-500" />
                                 </div>
-                                <div className="space-y-3">
-                                    <label className="flex items-center gap-3 text-[9px] uppercase text-gray-500 tracking-widest font-black ml-1"><Mail size={14} className="text-[#b59473]" /> Email</label>
-                                    <input required name="email" value={formData.email} onChange={handleChange} type="email" placeholder="email@domain.com" className="w-full bg-transparent border-b border-white/10 py-4 px-2 text-white outline-none focus:border-[#b59473]" />
+                                <div className="space-y-1">
+                                    <label className="flex items-center gap-2 text-[8px] uppercase text-stone-500 tracking-widest font-black ml-1"><Mail size={12} className="text-emerald-700" /> Email</label>
+                                    <input required name="email" value={formData.email} onChange={handleChange} type="email" placeholder="email@domain.com" className="w-full bg-stone-50 border border-stone-100 py-2 px-3 text-stone-800 text-xs rounded-lg outline-none focus:border-emerald-500" />
                                 </div>
                             </div>
                         </motion.div>
                     )}
 
                     {step === 3 && (
-                        <motion.div key="step3" initial={{ x: 15, opacity: 0 }} animate={{ x: 0, opacity: 1 }} exit={{ x: -15, opacity: 0 }} className="space-y-8">
+                        <motion.div key="step3" initial={{ x: 10, opacity: 0 }} animate={{ x: 0, opacity: 1 }} exit={{ x: -10, opacity: 0 }} className="space-y-4">
                             <div>
-                                <span className="text-[#b59473] text-[10px] uppercase tracking-[0.5em] font-bold">Contact</span>
-                                <h3 className="text-white text-4xl font-serif mt-2 italic">Final Details</h3>
-                            </div>
-                            <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-                                <div className="space-y-3">
-                                    <label className="flex items-center gap-3 text-[9px] uppercase text-gray-500 tracking-widest font-black ml-1"><Users size={14} className="text-[#b59473]" /> Members</label>
-                                    <select name="members" value={formData.members} onChange={handleChange} className="w-full bg-transparent border-b border-white/10 py-4 px-2 text-white outline-none appearance-none cursor-pointer focus:border-[#b59473]">
-                                        <option className="bg-[#111]">1 Adult</option>
-                                        <option className="bg-[#111]">2 Adults</option>
-                                        <option className="bg-[#111]">4 Adults</option>
-                                    </select>
-                                </div>
-                                <div className="space-y-3">
-                                    <label className="flex items-center gap-3 text-[9px] uppercase text-gray-500 tracking-widest font-black ml-1"><Phone size={14} className="text-[#b59473]" /> Phone</label>
-                                    <input required name="phone" value={formData.phone} onChange={handleChange} type="tel" placeholder="+..." className="w-full bg-transparent border-b border-white/10 py-4 px-2 text-white outline-none focus:border-[#b59473]" />
-                                </div>
+                                <span className="text-emerald-700 text-[9px] uppercase tracking-[0.3em] font-bold">Contact</span>
+                                <h3 className="text-stone-900 text-2xl font-serif mt-1 italic">Final Details</h3>
                             </div>
                             <div className="space-y-3">
-                                <label className="flex items-center gap-3 text-[9px] uppercase text-gray-500 tracking-widest font-black ml-1"><MapPin size={14} className="text-[#b59473]" /> Address</label>
-                                <input required name="address" value={formData.address} onChange={handleChange} type="text" placeholder="Your City, Country" className="w-full bg-transparent border-b border-white/10 py-4 px-2 text-white outline-none focus:border-[#b59473]" />
+                                <div className="space-y-1">
+                                    <label className="flex items-center gap-2 text-[8px] uppercase text-stone-500 tracking-widest font-black ml-1"><Users size={12} className="text-emerald-700" /> Members</label>
+                                    <select name="members" value={formData.members} onChange={handleChange} className="w-full bg-stone-50 border border-stone-100 py-2 px-3 text-stone-800 text-xs rounded-lg outline-none appearance-none cursor-pointer focus:border-emerald-500">
+                                        <option className="bg-white">1 Adult</option>
+                                        <option className="bg-white">2 Adults</option>
+                                        <option className="bg-white">4 Adults</option>
+                                    </select>
+                                </div>
+                                <div className="space-y-1">
+                                    <label className="flex items-center gap-2 text-[8px] uppercase text-stone-500 tracking-widest font-black ml-1"><Phone size={12} className="text-emerald-700" /> Phone</label>
+                                    <input required name="phone" value={formData.phone} onChange={handleChange} type="tel" placeholder="+..." className="w-full bg-stone-50 border border-stone-100 py-2 px-3 text-stone-800 text-xs rounded-lg outline-none focus:border-emerald-500" />
+                                </div>
+                                <div className="space-y-1">
+                                    <label className="flex items-center gap-2 text-[8px] uppercase text-stone-500 tracking-widest font-black ml-1"><MapPin size={12} className="text-emerald-700" /> Address</label>
+                                    <input required name="address" value={formData.address} onChange={handleChange} type="text" placeholder="Your City, Country" className="w-full bg-stone-50 border border-stone-100 py-2 px-3 text-stone-800 text-xs rounded-lg outline-none focus:border-emerald-500" />
+                                </div>
                             </div>
                         </motion.div>
                     )}
                 </AnimatePresence>
 
-                <div className="flex items-center justify-between mt-12 pt-8 border-t border-white/5">
+                {/* Compact Buttons */}
+                <div className="flex items-center justify-between mt-6 pt-4 border-t border-stone-100">
                     {step > 1 ? (
-                        <button type="button" onClick={prevStep} className="text-gray-500 hover:text-white text-[9px] font-black uppercase tracking-[0.3em]">Back</button>
+                        <button type="button" onClick={prevStep} className="text-stone-500 hover:text-emerald-700 text-[9px] font-black uppercase tracking-[0.2em]">Back</button>
                     ) : <span />}
 
                     {step < 3 ? (
-                        <button type="button" onClick={nextStep} className="group flex items-center gap-4 bg-[#b59473] text-black px-10 py-4 rounded-full font-bold text-[9px] uppercase tracking-widest hover:bg-white transition-all">Next Step <ArrowRight size={14} className="group-hover:translate-x-1 transition-transform" /></button>
+                        <button type="button" onClick={nextStep} className="group flex items-center gap-2 bg-emerald-700 text-white px-5 py-2.5 rounded-full font-bold text-[9px] uppercase tracking-widest hover:bg-emerald-800 transition-all">Next Step <ArrowRight size={12} className="group-hover:translate-x-1 transition-transform" /></button>
                     ) : (
-                        <button type="submit" disabled={loading} className="bg-white text-black px-12 py-4 rounded-full font-bold text-[9px] uppercase tracking-widest hover:bg-[#b59473] transition-all disabled:opacity-50 flex items-center gap-3">
-                            {loading && <Loader2 className="animate-spin" size={16} />}
-                            {loading ? 'Sending...' : 'Confirm Request'}
+                        <button type="submit" disabled={loading} className="bg-emerald-700 text-white px-5 py-2.5 rounded-full font-bold text-[9px] uppercase tracking-widest hover:bg-emerald-800 transition-all disabled:opacity-50 flex items-center gap-2">
+                            {loading && <Loader2 className="animate-spin" size={14} />}
+                            {loading ? 'Sending...' : 'Confirm'}
                         </button>
                     )}
                 </div>

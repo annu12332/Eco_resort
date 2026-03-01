@@ -22,7 +22,7 @@ const ManagePackages = () => {
     });
 
     const IMGBB_API_KEY = '4284488a37835ed459904bb22afad66f'; 
-    const API_URL = 'https://hotel-server-qryr.onrender.com/api/packages';
+    const API_URL = 'https://eco-resort-server.onrender.com/api/packages';
 
     useEffect(() => {
         fetchPackages();

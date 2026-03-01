@@ -9,7 +9,7 @@ const PackagesPage = () => {
     const [loading, setLoading] = useState(true);
 
     useEffect(() => {
-        axios.get('https://hotel-server-qryr.onrender.com/api/packages')
+        axios.get('https://eco-resort-server.onrender.com/api/packages')
             .then(res => { setPackages(res.data); setLoading(false); })
             .catch(() => setLoading(false));
     }, []);

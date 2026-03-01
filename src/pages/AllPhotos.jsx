@@ -10,7 +10,7 @@ const AllPhotos = () => {
     // Fetch images from API
     useEffect(() => {
         window.scrollTo(0, 0);
-        fetch('https://hotel-server-qryr.onrender.com/api/gallery')
+        fetch('https://eco-resort-server.onrender.com/api/gallery')
             .then(res => res.json())
             .then(data => {
                 console.log("Fetched images:", data);

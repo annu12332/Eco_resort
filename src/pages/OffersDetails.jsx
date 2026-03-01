@@ -27,7 +27,7 @@ const OfferDetails = () => {
     useEffect(() => {
         const fetchOfferDetails = async () => {
             try {
-                const res = await axios.get('https://hotel-server-qryr.onrender.com/api/offers');
+                const res = await axios.get('https://eco-resort-server.onrender.com/api/offers');
                 const foundOffer = res.data.find(o => o._id === id);
 
                 if (foundOffer) {
@@ -62,7 +62,7 @@ const OfferDetails = () => {
         };
 
         try {
-            await axios.post('https://hotel-server-qryr.onrender.com/api/bookings', bookingPayload);
+            await axios.post('https://eco-resort-server.onrender.com/api/bookings', bookingPayload);
 
             toast.success('Booking Request Sent! We will contact you shortly.', {
                 theme: "light",

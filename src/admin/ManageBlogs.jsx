@@ -8,7 +8,7 @@ const ManageBlogs = () => {
     const [uploading, setUploading] = useState(false); 
     const [formData, setFormData] = useState({ title: '', image: '', description: '', category: 'Travel' });
 
-    const API_URL = 'https://hotel-server-qryr.onrender.com/api/blogs';
+    const API_URL = 'https://eco-resort-server.onrender.com/api/blogs';
     const IMGBB_API_KEY = '4284488a37835ed459904bb22afad66f'; 
 
     useEffect(() => { fetchBlogs(); }, []);

@@ -20,7 +20,7 @@ const AllRooms = () => {
 
         const fetchAllRooms = async () => {
             try {
-                const res = await axios.get('https://hotel-server-qryr.onrender.com/api/rooms');
+                const res = await axios.get('https://eco-resort-server.onrender.com/api/rooms');
                 setRooms(res.data);
                 setFilteredRooms(res.data);
                 setLoading(false);

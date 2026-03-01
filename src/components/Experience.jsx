@@ -1,6 +1,7 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { ArrowRight, Sparkles } from 'lucide-react';
+import { Link } from 'react-router-dom';
 
 const Activities = () => {
     // Extended list for a "page" feel
@@ -114,7 +115,7 @@ const Activities = () => {
                 </div>
 
                 {/* --- CTA Button --- */}
-                <div className="text-center">
+               <Link to={'/activities'}> <div className="text-center">
                     <motion.button
                         whileHover={{ scale: 1.05 }}
                         whileTap={{ scale: 0.95 }}
@@ -123,7 +124,7 @@ const Activities = () => {
                         View All Activities
                         <ArrowRight size={18} className="group-hover:translate-x-1 transition-transform" />
                     </motion.button>
-                </div>
+                </div></Link>
             </div>
         </section>
     );

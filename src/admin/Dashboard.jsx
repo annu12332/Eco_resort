@@ -14,7 +14,7 @@ export default function ManageGallery() {
 
     const fetchPhotos = async () => {
         try {
-            const res = await axios.get('https://hotel-server-qryr.onrender.com/api/gallery');
+            const res = await axios.get('https://eco-resort-server.onrender.com/api/gallery');
             setPhotos(res.data);
         } catch (err) { console.error("Error fetching gallery:", err); }
     };
@@ -23,7 +23,7 @@ export default function ManageGallery() {
         e.preventDefault();
         setLoading(true);
         try {
-            await axios.post('https://hotel-server-qryr.onrender.com/api/gallery', formData);
+            await axios.post('https://eco-resort-server.onrender.com/api/gallery', formData);
             setFormData({ title: '', url: '' });
             fetchPhotos();
         } catch (err) { alert("Photo upload failed"); }
@@ -33,7 +33,7 @@ export default function ManageGallery() {
     const handleDelete = async (id) => {
         if (window.confirm("Are you sure you want to delete this image?")) {
             try {
-                await axios.delete(`https://hotel-server-qryr.onrender.com/api/gallery/${id}`);
+                await axios.delete(`https://eco-resort-server.onrender.com/api/gallery/${id}`);
                 setPhotos(photos.filter(p => p._id !== id));
             } catch (err) { alert("Deletion failed"); }
         }

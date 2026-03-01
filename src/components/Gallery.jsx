@@ -11,7 +11,7 @@ const Gallery = () => {
     useEffect(() => {
         const fetchGallery = async () => {
             try {
-                const res = await axios.get('https://hotel-server-qryr.onrender.com/api/gallery');
+                const res = await axios.get('https://eco-resort-server.onrender.com/api/gallery');
                 setImages(res.data);
             } catch (err) {
                 console.error("Gallery Fetch Error:", err);

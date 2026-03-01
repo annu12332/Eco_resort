@@ -12,7 +12,7 @@ const Offers = () => {
     useEffect(() => {
         const fetchOffers = async () => {
             try {
-                const res = await axios.get('https://hotel-server-qryr.onrender.com/api/offers');
+                const res = await axios.get('https://eco-resort-server.onrender.com/api/offers');
                 setOffers(res.data);
             } catch (err) {
                 setError(err.message);

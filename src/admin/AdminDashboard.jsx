@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Sidebar } from './Sidebar';
-import AddRoom from './AddRoom';
+import AddCottageForm from './AddCottage';
 import ManageRooms from '../admin/ManageRooms';
 import AllBookings from './AllBookings';
 import ManageGallery from './ManageGallery'; 
@@ -12,7 +12,7 @@ import ManagePackages from './ManagePackages';
 import { Menu, Trees, Calendar, DollarSign, Bell, Leaf, Package } from 'lucide-react';
 import axios from 'axios';
 
-export const AdminDashboard = () => {
+const AdminDashboard = () => {
     const [activeTab, setActiveTab] = useState('stats');
     const [isSidebarOpen, setIsSidebarOpen] = useState(false);
     const [stats, setStats] = useState({
@@ -38,9 +38,9 @@ export const AdminDashboard = () => {
         const fetchDashboardData = async () => {
             try {
                 // প্রতিটি এপিআই কল আলাদাভাবে করা হচ্ছে এবং এরর হ্যান্ডেল করা হয়েছে 
-                const roomsReq = axios.get('https://hotel-server-qryr.onrender.com/api/rooms').catch(e => ({ data: [] }));
-                const bookingsReq = axios.get('https://hotel-server-qryr.onrender.com/api/bookings').catch(e => ({ data: [] }));
-                const packagesReq = axios.get('https://hotel-server-qryr.onrender.com/api/packages').catch(e => ({ data: [] }));
+                const roomsReq = axios.get('https://eco-resort-server.onrender.com/api/rooms').catch(e => ({ data: [] }));
+                const bookingsReq = axios.get('https://eco-resort-server.onrender.com/api/bookings').catch(e => ({ data: [] }));
+                const packagesReq = axios.get('https://eco-resort-server.onrender.com/api/packages').catch(e => ({ data: [] }));
 
                 const [roomsRes, bookingsRes, packagesRes] = await Promise.all([roomsReq, bookingsReq, packagesReq]);
                 
@@ -142,7 +142,7 @@ export const AdminDashboard = () => {
                                 exit={{ opacity: 0, y: -15 }}
                                 transition={{ duration: 0.3 }}
                             >
-                                {activeTab === 'add-room' && <AddRoom />}
+                                {activeTab === 'add-cottage' && <AddCottageForm />}
                                 {activeTab === 'manage' && <ManageRooms />}
                                 {activeTab === 'bookings' && <AllBookings />}
                                 {activeTab === 'manage-gallery' && <ManageGallery />}
@@ -215,3 +215,5 @@ const StatsCard = ({ label, value, icon, color }) => {
         </motion.div>
     );
 };
+
+export default AdminDashboard;
