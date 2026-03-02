@@ -15,6 +15,7 @@ import HeroSection from './components/HeroSection';
 import Footer from './components/Footer';
 import ScrollToTop from './components/ScrollToTop';
 import Gallery from './components/Gallery';
+import InstallPWA from '../src/InstallPWA'; 
 
 // Pages
 import AdminDashboard from './admin/AdminDashboard'
@@ -39,7 +40,6 @@ function App() {
   const [loading, setLoading] = useState(true);
   const location = useLocation();
 
-  // ১. ইউজার লগইন আছে কি না তা চেক করা
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
       setUser(currentUser);
@@ -48,7 +48,6 @@ function App() {
     return () => unsubscribe();
   }, []);
 
-  // ২. অ্যাডমিন পেজে থাকলে মেইন ওয়েবসাইটের Navbar/Footer লুকানোর লজিক
   const isAdminPath = location.pathname.startsWith('/admin');
 
   if (loading) {
@@ -62,11 +61,12 @@ function App() {
   return (
     <div className="relative min-h-screen">
       <ScrollToTop />
+      
+      {/* PWA Install Prompt - অ্যাডমিন প্যানেলে দেখাবে না */}
+      {!isAdminPath && <InstallPWA />}
 
-      {/* অ্যাডমিন প্যানেল ছাড়া অন্য সব পেজে Navbar দেখাবে */}
       {!isAdminPath && <Navbar />}
 
-      {/* ব্যাকগ্রাউন্ড অ্যানিমেশন শুধুমাত্র মেইন সাইটের জন্য */}
       {!isAdminPath && (
         <div className="fixed inset-0 z-[-1]">
           <BackgroundAnimator />
@@ -76,7 +76,6 @@ function App() {
 
       <main className={isAdminPath ? "" : "relative z-10"}>
         <Routes>
-          {/* --- Public Routes --- */}
           <Route path="/" element={
             <>
               <HeroSection />
@@ -98,29 +97,22 @@ function App() {
           <Route path="/package/:id" element={<PackageDetails />} />
           <Route path="/packages" element={<PackagesPage />} />
           <Route path="/activities" element={<ActivitiesPage />} />
-
-
-
           <Route path="/gallery" element={<AllPhotos />} />
           <Route path="/offers" element={<Offers />} />
           <Route path="/offers/:id" element={<OfferDetails />} />
           <Route path="/all-rooms" element={<AllRooms />} />
 
-          {/* --- Login Route --- */}
           <Route path="/login" element={!user ? <Login /> : <Navigate to="/admin/dashboard" />} />
 
-          {/* --- Protected Admin Routes --- */}
           <Route
             path="/admin/dashboard/*"
             element={user ? <AdminDashboard /> : <Navigate to="/login" />}
           />
 
-          {/* ভুল ইউআরএল দিলে হোমে পাঠিয়ে দিবে */}
           <Route path="*" element={<Navigate to="/" />} />
         </Routes>
       </main>
 
-      {/* অ্যাডমিন প্যানেল ছাড়া অন্য সব পেজে Footer দেখাবে */}
       {!isAdminPath && <Footer />}
     </div>
   );
