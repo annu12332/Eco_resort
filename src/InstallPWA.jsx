@@ -8,8 +8,9 @@ const InstallPWA = () => {
   const [isVisible, setIsVisible] = useState(false);
 
   useEffect(() => {
-    // 1. Check if it's an iOS device (iPhone/iPad)
-    const isApple = /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream;
+    // 1. Device Detection
+    const isApple = /iPad|iPhone|iPod/.test(navigator.userAgent) || 
+      (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1);
     setIsIOS(isApple);
 
     // 2. Android/Chrome handler for beforeinstallprompt
@@ -29,7 +30,7 @@ const InstallPWA = () => {
 
     window.addEventListener('beforeinstallprompt', handler);
     return () => window.removeEventListener('beforeinstallprompt', handler);
-  }, []);
+  }, []); // <--- Correct syntax: useEffect closes here
 
   const handleInstallClick = async () => {
     if (!deferredPrompt) return;
@@ -45,7 +46,8 @@ const InstallPWA = () => {
   };
 
   const handleClose = () => {
-    setIsVisible(false);
+    setIsVisible(false); // Immediate close
+    
     // Remember dismissal
     localStorage.setItem('pwa_dismissed', 'true'); 
   };
@@ -63,13 +65,15 @@ const InstallPWA = () => {
             
             {/* Top Section: Icon and Text */}
             <div className="flex items-start gap-4 mb-4">
-              <div className="bg-emerald-50 p-3 rounded-xl flex items-center justify-center">
-                <Smartphone className="text-emerald-500" size={24} />
+              {/* Eco Color Theme applied here */}
+              <div className="bg-[#e6f7ef] p-3 rounded-xl flex items-center justify-center">
+                <Smartphone className="text-[#10B981]" size={24} />
               </div>
               
               <div className="flex-1">
                 <div className="flex justify-between items-center">
                   <h3 className="font-bold text-gray-800 text-base">Use as an App</h3>
+                  {/* Close Icon */}
                   <button onClick={handleClose} className="text-gray-400 hover:text-gray-600 transition-colors">
                     <X size={20} />
                   </button>
@@ -93,9 +97,10 @@ const InstallPWA = () => {
                 </div>
               </div>
             ) : (
+              // Full width "Add to Home Screen" button in Eco Color
               <button
                 onClick={handleInstallClick}
-                className="w-full bg-[#047857] hover:bg-[#065f46] text-white font-bold py-3 px-4 rounded-xl flex items-center justify-center gap-2 transition-all active:scale-95 shadow-lg shadow-emerald-100"
+                className="w-full bg-[#10B981] hover:bg-[#059669] text-white font-bold py-3 px-4 rounded-xl flex items-center justify-center gap-2 transition-all active:scale-95 shadow-lg shadow-emerald-100"
               >
                 <Download size={18} />
                 Add to Home Screen
