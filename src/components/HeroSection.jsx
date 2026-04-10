@@ -1,106 +1,94 @@
-import React, { useState, useEffect } from 'react';
-import { FaLeaf, FaMapMarkerAlt, FaPhoneAlt, FaEnvelope, FaFacebookF, FaInstagram, FaTwitter } from 'react-icons/fa';
-import { Link } from 'react-router-dom';
+import React, { useState, useEffect } from "react";
 
-const HeroSection = () => {
-    const [scrolled, setScrolled] = useState(false);
+const Hero = () => {
+  const [isLoaded, setIsLoaded] = useState(false);
 
-    useEffect(() => {
-        const handleScroll = () => setScrolled(window.scrollY > 50);
-        window.addEventListener('scroll', handleScroll);
-        return () => window.removeEventListener('scroll', handleScroll);
-    }, []);
+  useEffect(() => {
+    setIsLoaded(true);
+  }, []);
 
-    const images = {
-        mainArch: "https://plus.unsplash.com/premium_photo-1685305380695-90e58a33d4e9?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MXx8ZWNvJTIwcmVzb3J0fGVufDB8fDB8fHww",
-        hex1: "https://images.unsplash.com/photo-1758551940959-eacf38206d28?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTB8fGVjbyUyMHJlc29ydHxlbnwwfHwwfHx8MA%3D%3D",
-        hex2: "https://plus.unsplash.com/premium_photo-1682285210821-5d1b5a406b97?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTd8fGVjbyUyMHJlc29ydHxlbnwwfHwwfHx8MA%3D%3D",
-        hex3: "https://media.istockphoto.com/id/108312274/photo/thailand-bangkok-my-room-of-honeymoon.webp?a=1&b=1&s=612x612&w=0&k=20&c=fqv2RrFtimSEIRjs3hta-HYMsnvkKouKFAnq_gumY1o=",
-        hex4: "https://media.istockphoto.com/id/1334118685/photo/computer-generated-image-of-interior-of-bathroom-in-3d-with-houseplant.webp?a=1&b=1&s=612x612&w=0&k=20&c=e8HQ9q8gl7Qf3IczAq9emZHjNcY_Gtb9GghMfe2KgKs=",
-    };
+  return (
+    <section className="relative w-full min-h-screen flex items-center justify-center overflow-hidden bg-[#F4F1EA]">
+      <div className="absolute inset-0 z-0">
+        <img
+          src="https://images.unsplash.com/photo-1540541338287-41700207dee6?auto=format&fit=crop&q=80&w=2000"
+          alt="Eco Resort"
+          className={`w-full h-full object-cover transition-transform duration-[5000ms] ease-out ${isLoaded ? 'scale-100' : 'scale-110'}`}
+        />
+        <div className="absolute inset-0 bg-black/30 md:bg-black/20"></div>
+      </div>
 
-    const hexClipPath = { clipPath: 'polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%)' };
-    const imageClass = "w-full h-full object-cover transition-transform duration-700 group-hover:scale-110";
-
-    return (
-        // LIGHT THEME: bg-stone-50, text-stone-900
-        <div className="relative min-h-screen w-full bg-stone-50 overflow-hidden font-sans text-stone-900">
-            {/* Background Layer with Soft Parallax */}
-            <div className="absolute inset-0 z-0">
-                <img
-                    src={images.mainArch}
-                    alt="Deep Forest"
-                    // Removed heavy opacity, added subtle overlay
-                    className="w-full h-full object-cover transform scale-105"
-                />
-                <div className="absolute inset-0 bg-gradient-to-r from-stone-50 via-stone-50/70 to-transparent"></div>
-            </div>
-
-            {/* Content Layer */}
-            <div className="relative z-10 flex flex-col min-h-screen">
-
-               
-                {/* --- 2. Main Body Content --- */}
-                <div className="flex-grow flex items-center py-10">
-                    <div className="container mx-auto px-6 grid lg:grid-cols-12 gap-10 items-center">
-
-                        {/* Left Side: Content - Dark Text */}
-                        <div className="lg:col-span-5 order-2 lg:order-1 space-y-1 text-center mt-[-50px] lg:text-left">
-                            <span className="inline-flex items-center gap-2 bg-emerald-50 text-emerald-800 text-xs font-semibold px-4 py-1.5 rounded-full uppercase tracking-widest border border-emerald-100 backdrop-blur-sm">
-                                <FaLeaf size={12} /> Sustainable Luxury
-                            </span>
-                            <h1 className="text-4xl md:text-7xl font-serif leading-[0.95] tracking-tight text-stone-950">
-                                Reconnect with <br />
-                                <span className="text-emerald-700 italic font-light">Nature.</span>
-                            </h1>
-                            <p className="text-stone-700 text-lg max-w-md mx-auto lg:mx-0 font-light leading-relaxed">
-                                Reconnect in the heart of the jungle.
-                            </p>
-                            <div className="flex flex-wrap justify-center lg:justify-start gap-4 pt-4">
-                                <Link to={"/reservation"}>
-                                    {/* LIGHT THEME BUTTONS */}
-                                    <button className="bg-emerald-700 text-white px-10 py-4 text-xs font-bold uppercase tracking-widest hover:bg-stone-950 transition-all rounded-full shadow-lg shadow-emerald-500/20">
-                                        Book Journey
-                                    </button>
-                                </Link>
-                                <Link to={'/all-rooms'}>
-                                    <button className="border border-stone-300 text-stone-900 px-10 py-4 text-xs font-bold uppercase tracking-widest hover:bg-stone-950 hover:text-white transition-all rounded-full backdrop-blur-sm">
-                                        Our Cottages
-                                    </button>
-                                </Link>
-                            </div>
-                        </div>
-
-                        {/* Right Side: Image Complex Layout */}
-                        <div className="lg:col-span-7 order-1 lg:order-2 flex justify-center items-center h-[400px] md:h-[550px] lg:h-[650px] relative p-4 md:p-10">
-
-                            {/* Main Arch Image - Light Styling */}
-                            <div className="absolute w-[220px] h-[300px] md:w-[280px] md:h-[400px] lg:w-[320px] lg:h-[460px] rounded-t-[100px] overflow-hidden border-[6px] md:border-[8px] border-white shadow-2xl shadow-stone-200 z-20 group backdrop-blur-md bg-white/50">
-                                <img src={images.mainArch} className={imageClass} alt="Main Arch" />
-                            </div>
-
-                            {/* Floating Hexagons - Light Styling */}
-                            <div className="hidden lg:block absolute top-5 right-10 w-36 h-36 z-10 group backdrop-blur-sm border-4 border-white shadow-lg" style={hexClipPath}>
-                                <img src={images.hex1} className={imageClass} alt="Hex 1" />
-                            </div>
-
-                            <div className="hidden lg:block absolute top-36 left-5 w-40 h-40 z-10 group backdrop-blur-sm border-4 border-white shadow-lg" style={hexClipPath}>
-                                <img src={images.hex2} className={imageClass} alt="Hex 2" />
-                            </div>
-
-                            <div className="hidden lg:block absolute bottom-20 left-20 w-32 h-32 z-10 group backdrop-blur-sm border-4 border-white shadow-lg" style={hexClipPath}>
-                                <img src={images.hex3} className={imageClass} alt="Hex 3" />
-                            </div>
-
-                            <div className="hidden lg:block absolute bottom-16 right-10 w-36 h-36 z-10 group backdrop-blur-sm border-4 border-white shadow-lg" style={hexClipPath}>
-                                <img src={images.hex4} className={imageClass} alt="Hex 4" />
-                            </div>
-                        </div>
-                    </div>
+      <div className="relative z-10 w-full max-w-5xl px-6 pt-20 md:pt-32 pb-12">
+        <div 
+          className={`transition-all duration-1000 ease-out transform ${
+            isLoaded ? "translate-y-0 opacity-100" : "translate-y-12 opacity-0"
+          }`}
+        >
+          <div className="relative mx-auto max-w-3xl">
+            <div className="absolute -inset-1 bg-white/10 rounded-[32px] blur-sm"></div>
+            
+            <div className="relative bg-white/10 backdrop-blur-md md:backdrop-blur-lg rounded-[32px] border border-white/30 shadow-2xl overflow-hidden">
+              <div className="py-10 px-6 md:py-16 md:px-16 text-center">
+                
+                <div className="inline-flex items-center gap-2 bg-white/20 backdrop-blur-md px-4 py-1.5 rounded-full mb-6 border border-white/20">
+                  <span className="text-emerald-400 text-[10px] animate-pulse">●</span>
+                  <span className="font-sans text-[10px] tracking-[0.2em] text-white font-bold uppercase">
+                    Sustainable Sanctuary
+                  </span>
                 </div>
+                
+                <h1 className="font-['Playball'] text-5xl md:text-7xl lg:text-8xl text-white leading-[1.2] mb-6 drop-shadow-md">
+                  The Longer You Stay
+                </h1>
+                
+                <div className="flex items-center justify-center gap-4 mb-10">
+                  <div className="h-px bg-white/30 flex-1 max-w-[60px]"></div>
+                  <p className="font-sans text-[11px] md:text-xs tracking-[0.5em] text-white/90 font-medium uppercase whitespace-nowrap">
+                    The Less You Pay
+                  </p>
+                  <div className="h-px bg-white/30 flex-1 max-w-[60px]"></div>
+                </div>
+
+                <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
+                  <button className="w-full sm:w-auto bg-white text-[#4A5D43] px-10 py-4 rounded-2xl font-sans text-xs font-black uppercase tracking-widest hover:bg-[#78936D] hover:text-white transition-all duration-300 shadow-lg active:scale-95">
+                    Book Retreat
+                  </button>
+                  <button className="w-full sm:w-auto bg-black/20 backdrop-blur-md border border-white/20 text-white px-10 py-4 rounded-2xl font-sans text-xs font-bold uppercase tracking-widest hover:bg-white/20 transition-all duration-300">
+                    View Escape
+                  </button>
+                </div>
+              </div>
             </div>
+          </div>
         </div>
-    );
+      </div>
+
+      <div className="absolute bottom-8 left-0 w-full px-8 md:px-16 flex justify-between items-center z-20">
+        <div className="flex items-center gap-4 bg-white/10 backdrop-blur-md border border-white/10 p-2 pr-5 rounded-2xl">
+          <div className="w-10 h-10 rounded-xl bg-[#78936D] flex items-center justify-center text-white shadow-lg">
+            <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 13l4 4L19 7" />
+            </svg>
+          </div>
+          <div className="hidden md:block">
+            <p className="text-white text-[9px] uppercase tracking-widest font-bold opacity-60">Certified</p>
+            <p className="text-white text-[11px] font-semibold">100% Eco-Friendly</p>
+          </div>
+        </div>
+
+        <div className="flex flex-col items-center gap-2">
+          <div className="w-8 h-12 border-2 border-white/30 rounded-full flex justify-center p-1">
+             <div className="w-1.5 h-1.5 bg-white rounded-full animate-bounce"></div>
+          </div>
+        </div>
+      </div>
+
+      <style jsx global>{`
+        @import url('https://fonts.googleapis.com/css2?family=Playball&family=Plus+Jakarta+Sans:wght@400;600;700;800&display=swap');
+        .font-sans { font-family: 'Plus Jakarta Sans', sans-serif; }
+      `}</style>
+    </section>
+  );
 };
 
-export default HeroSection;
+export default Hero;

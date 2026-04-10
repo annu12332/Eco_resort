@@ -1,100 +1,128 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { FaTree, FaWater } from 'react-icons/fa';
 import { Link } from 'react-router-dom';
-
-const Banner = () => {
-  const images = [
-    "https://images.unsplash.com/photo-1529419412599-7bb870e11810?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTF8fG5hdHVyZXxlbnwwfHwwfHx8MA%3D%3D", // Center
-    "https://images.unsplash.com/photo-1426604966848-d7adac402bff?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTh8fG5hdHVyZXxlbnwwfHwwfHx8MA%3D%3D", // Top right
-    "https://images.unsplash.com/photo-1513836279014-a89f7a76ae86?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTZ8fG5hdHVyZXxlbnwwfHwwfHx8MA%3D%3D", // Bottom right
-    "https://media.istockphoto.com/id/1347088244/photo/kerala-most-beautiful-place-of-india.webp?a=1&b=1&s=612x612&w=0&k=20&c=azs5OiyZpD_zPj96NASr737IVrCq2_m0iu08EVDvIvE=", // Top left
-    "https://media.istockphoto.com/id/2231002213/photo/early-morning-on-tea-plantation-nuwara-eliya-ceylon.webp?a=1&b=1&s=612x612&w=0&k=20&c=6xDLC9aSNtDzOqprCRYgs06BizetQU7IZrRV6_LKnMI=", // Bottom left
-  ];
-
-  const hexagonStyle = {
-    clipPath: 'polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%)',
-  };
-
+const EcoPremiumBanner = () => {
   return (
-    <section className="bg-emerald-50 py-16 lg:py-24 overflow-hidden font-sans">
-      <div className="container mx-auto px-6">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+    <section className="relative py-24 md:py-40 bg-[#FBFBF9] overflow-hidden">
+      {/* Background Decorative SVG Texture */}
+      <div className="absolute top-0 left-0 w-full h-full opacity-[0.04] pointer-events-none">
+        <svg width="100%" height="100%" xmlns="http://www.w3.org/2000/svg">
+          <pattern id="leaf-pattern" x="0" y="0" width="100" height="100" patternUnits="userSpaceOnUse">
+            <path d="M50 20 Q60 40 50 60 Q40 40 50 20" fill="#4A5D43" />
+          </pattern>
+          <rect width="100%" height="100%" fill="url(#leaf-pattern)" />
+        </svg>
+      </div>
+
+      <div className="max-w-7xl mx-auto px-6 relative z-10">
+        <div className="flex flex-col lg:flex-row items-center gap-16 lg:gap-24">
           
-          {/* --- Left Content --- */}
-          <motion.div 
-            initial={{ opacity: 0, x: -50 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.8 }}
-            viewport={{ once: true }}
-            className="order-2 lg:order-1"
-          >
-            <span className="inline-block bg-emerald-100 text-emerald-800 text-xs font-semibold px-4 py-1.5 rounded-full uppercase tracking-widest mb-4">
-              Your Sanctuary Awaits
-            </span>
-            <h1 className="text-4xl md:text-5xl lg:text-6xl font-serif text-emerald-950 leading-tight mb-6">
-              Experience Unspoiled <span className="text-emerald-600">Wilderness</span>
-            </h1>
-            <p className="text-stone-600 text-lg mb-8 leading-relaxed max-w-lg">
-              Immerse yourself in sustainable luxury, tranquil forests, and pristine waters. Rediscover peace in the heart of nature.
-            </p>
+          {/* Left Side: Artistic Image Composition */}
+          <div className="relative w-full lg:w-1/2">
+            {/* Organic Shape Background */}
+            <div className="absolute -top-10 -left-10 w-64 h-64 bg-[#E8EEDF] rounded-full blur-3xl opacity-60 animate-pulse"></div>
             
-            <div className="grid grid-cols-2 gap-6 mb-10">
-              <div className="flex items-center gap-3">
-                <div className="p-3 bg-white rounded-full shadow-md text-emerald-600">
-                    <FaTree size={20} />
-                </div>
-                <span className="font-semibold text-emerald-950">Forest Trails</span>
+            <div className="relative">
+              {/* Main Image with Masking Effect */}
+              <div className="relative z-10 rounded-[60px_20px_100px_40px] overflow-hidden shadow-[0_40px_100px_-20px_rgba(74,93,67,0.3)] border-[8px] border-white">
+                <img 
+                  src="https://images.unsplash.com/photo-1518733057094-95b53143d2a7?auto=format&fit=crop&q=80&w=1000" 
+                  alt="Eco Interior" 
+                  className="w-full h-[500px] object-cover"
+                />
               </div>
-              <div className="flex items-center gap-3">
-                <div className="p-3 bg-white rounded-full shadow-md text-emerald-600">
-                    <FaWater size={20} />
+
+              {/* Floating Glass Card */}
+              <motion.div 
+                initial={{ y: 20, opacity: 0 }}
+                whileInView={{ y: 0, opacity: 1 }}
+                className="absolute -bottom-10 -right-6 md:right-10 z-20 bg-white/70 backdrop-blur-2xl p-8 rounded-[30px] shadow-2xl border border-white/50 max-w-[280px]"
+              >
+                <div className="flex items-center gap-4 mb-4">
+                  <div className="w-12 h-12 rounded-full bg-[#78936D] flex items-center justify-center text-white shadow-lg">
+                    <span className="text-xl">🌿</span>
+                  </div>
+                  <div>
+                    <p className="text-[10px] font-black uppercase tracking-widest text-stone-400">Purity Level</p>
+                    <p className="text-stone-800 font-serif font-bold italic">99.9% Organic</p>
+                  </div>
                 </div>
-                <span className="font-semibold text-emerald-950">Lake Activities</span>
+                <p className="text-xs text-stone-500 leading-relaxed font-medium">
+                  Every material used in our cottages is sourced responsibly from local forests.
+                </p>
+              </motion.div>
+            </div>
+          </div>
+
+          {/* Right Side: Content */}
+          <div className="w-full lg:w-1/2 text-left">
+            <motion.div
+              initial={{ opacity: 0, x: 30 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.8 }}
+            >
+              <div className="flex items-center gap-3 mb-6">
+                <div className="h-[1px] w-12 bg-[#78936D]"></div>
+                <span className="text-[11px] font-black uppercase tracking-[0.4em] text-[#78936D]">
+                  The Soul of Almaris
+                </span>
               </div>
-            </div>
 
-            <Link to={'/about'}><button className="bg-emerald-700 text-white px-8 py-3.5 rounded-full font-semibold hover:bg-emerald-800 transition shadow-lg hover:shadow-emerald-200">
-              Explore More
-            </button></Link>
-          </motion.div>
+              <h2 className="text-5xl md:text-7xl font-serif text-stone-900 leading-[1.1] mb-8">
+                Breath In, <br />
+                <span className="text-[#78936D] italic">Reconnect</span> with <br />
+                the Earth.
+              </h2>
 
-          {/* --- Right Image Gallery (Hexagons) --- */}
-          <motion.div 
-            initial={{ opacity: 0, scale: 0.8 }}
-            whileInView={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 0.8, delay: 0.2 }}
-            viewport={{ once: true }}
-            className="order-1 lg:order-2 relative h-[400px] md:h-[500px] flex justify-center items-center"
-          >
-            
-            {/* Center Main Hexagon */}
-            <div className="absolute w-48 h-48 md:w-60 md:h-60 z-10 group overflow-hidden shadow-2xl" style={hexagonStyle}>
-              <img src={images[0]} alt="Resort" className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" />
-            </div>
+              <p className="text-stone-600 text-lg md:text-xl leading-relaxed mb-12 font-sans font-light italic">
+                "In every walk with nature, one receives far more than he seeks." 
+                <span className="block mt-4 not-italic font-bold text-sm text-stone-400 tracking-tighter uppercase">— John Muir</span>
+              </p>
 
-            {/* Floating Hexagons - Positions adjusted for better overlap */}
-            <div className="absolute w-32 h-32 md:w-40 md:h-40 top-0 left-5 md:top-5 md:left-5 group overflow-hidden shadow-lg rotate-12" style={hexagonStyle}>
-                <img src={images[3]} alt="Feature 1" className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" />
-            </div>
-            
-            <div className="absolute w-32 h-32 md:w-40 md:h-40 bottom-0 left-5 md:bottom-5 md:left-5 group overflow-hidden shadow-lg -rotate-12" style={hexagonStyle}>
-                <img src={images[4]} alt="Feature 2" className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" />
-            </div>
-            
-            <div className="absolute w-28 h-28 md:w-36 md:h-36 top-10 right-0 md:top-0 md:right-5 group overflow-hidden shadow-lg -rotate-12" style={hexagonStyle}>
-                <img src={images[1]} alt="Feature 3" className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" />
-            </div>
-            
-            <div className="absolute w-28 h-28 md:w-36 md:h-36 bottom-10 right-0 md:bottom-0 md:right-5 group overflow-hidden shadow-lg rotate-12" style={hexagonStyle}>
-                <img src={images[2]} alt="Feature 4" className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" />
-            </div>
-          </motion.div>
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-12">
+                <div className="flex flex-col gap-2">
+                  <h4 className="text-stone-800 font-bold text-sm uppercase tracking-widest">Heritage Design</h4>
+                  <p className="text-stone-500 text-xs leading-relaxed">Traditional Sreemangal architecture blended with modern eco-tech.</p>
+                </div>
+                <div className="flex flex-col gap-2">
+                  <h4 className="text-stone-800 font-bold text-sm uppercase tracking-widest">Solar Powered</h4>
+                  <p className="text-stone-500 text-xs leading-relaxed">Our entire resort runs on 100% clean, renewable energy systems.</p>
+                </div>
+              </div>
 
+              <div className="flex flex-col sm:flex-row items-center gap-8">
+                <motion.button 
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.95 }}
+                  className="w-full sm:w-auto bg-[#2D3629] text-white px-12 py-5 rounded-full font-sans text-xs font-bold uppercase tracking-[0.3em] shadow-[0_20px_40px_rgba(45,54,41,0.3)]"
+                >
+                  Explore Our Ethics
+                </motion.button>
+                
+                <Link to="/rooms" className="text-stone-800 font-bold text-xs uppercase tracking-widest border-b-2 border-[#78936D] pb-1 hover:text-[#78936D] transition-colors">
+                  View Cottages
+                </Link>
+              </div>
+            </motion.div>
+          </div>
         </div>
       </div>
+
+      {/* Aesthetic Floating Leaf */}
+      <motion.div 
+        animate={{ 
+          y: [0, -20, 0],
+          rotate: [0, 5, 0]
+        }}
+        transition={{ duration: 6, repeat: Infinity }}
+        className="absolute top-20 right-[5%] opacity-20 hidden lg:block"
+      >
+        <svg width="120" height="120" viewBox="0 0 100 100" fill="#78936D">
+          <path d="M50 10 Q70 10 80 40 Q90 70 50 90 Q10 70 20 40 Q30 10 50 10" />
+        </svg>
+      </motion.div>
     </section>
   );
 };
 
-export default Banner;
+export default EcoPremiumBanner;

@@ -21,7 +21,6 @@ export const Sidebar = ({ activeTab, setActiveTab, isSidebarOpen, setIsSidebarOp
         { id: 'manage-packages', name: 'Manage Packages', icon: <Package size={20} /> },
         { id: 'manage-blogs', name: 'Manage Blogs', icon: <FileText size={20} /> },
         { id: 'manage-gallery', name: 'Gallery', icon: <ImageIcon size={20} /> },
-        // 2. UPDATED: Updated icon and fixed typo ("Activities")
         { id: 'manage-activities', name: 'Activities', icon: <Zap size={20} /> }, 
     ];
 

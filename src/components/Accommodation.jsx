@@ -11,19 +11,16 @@ const Accommodation = () => {
     const [error, setError] = useState(null);
 
     useEffect(() => {
-        AOS.init({ duration: 800, once: true });
+        AOS.init({ duration: 1000, once: true });
 
         const fetchRooms = async () => {
             try {
                 setLoading(true);
                 const response = await fetch(`https://eco-resort-server.onrender.com/api/cottages`);
-                
                 if (!response.ok) throw new Error('Failed to fetch accommodations');
-                
                 const data = await response.json();
                 setDisplayRooms(Array.isArray(data) ? data.slice(0, 4) : []);
             } catch (err) {
-                console.error("Error fetching rooms:", err);
                 setError("Unable to load accommodations at the moment.");
             } finally {
                 setLoading(false);
@@ -34,125 +31,107 @@ const Accommodation = () => {
     }, []);
 
     const cardVariants = {
-        hidden: { opacity: 0, y: 30 },
-        visible: { opacity: 1, y: 0, transition: { duration: 0.6, ease: "easeOut" } }
+        hidden: { opacity: 0, y: 40 },
+        visible: { opacity: 1, y: 0, transition: { duration: 0.8, ease: [0.16, 1, 0.3, 1] } }
     };
 
-    const SkeletonCard = () => (
-        <div className="bg-white rounded-3xl p-5 border border-stone-100 animate-pulse">
-            <div className="rounded-2xl bg-stone-200 aspect-[16/10] mb-6"></div>
-            <div className="h-4 bg-stone-200 rounded w-1/4 mb-4"></div>
-            <div className="h-8 bg-stone-200 rounded w-3/4 mb-3"></div>
-            <div className="h-4 bg-stone-200 rounded w-full mb-6"></div>
-            <div className="flex justify-between gap-2">
-                <div className="h-6 bg-stone-200 rounded w-1/3"></div>
-                <div className="h-6 bg-stone-200 rounded w-1/3"></div>
-            </div>
-        </div>
-    );
-
     return (
-        <section className="relative py-16 md:py-24 overflow-hidden bg-stone-50 text-stone-900">
-            <div className="absolute inset-0 z-0">
-                <div className="absolute inset-0 bg-gradient-to-b from-emerald-50/50 via-stone-50 to-stone-50"></div>
-                <div className="absolute -top-40 -left-20 w-[400px] h-[400px] bg-emerald-100 rounded-full blur-[120px] opacity-40"></div>
-                <div className="absolute -bottom-20 -right-20 w-[400px] h-[400px] bg-stone-200 rounded-full blur-[120px] opacity-40"></div>
-            </div>
-            
-            <div className="relative z-10 container mx-auto px-6 md:px-12 lg:px-20">
-                <div className="text-center mb-16" data-aos="fade-up">
-                    <div className="flex items-center justify-center gap-3 mb-3">
-                        <span className="h-px w-8 bg-emerald-700/30"></span>
-                        <span className="text-emerald-800 uppercase tracking-[0.2em] text-[10px] font-bold flex items-center gap-2">
-                            <FaLeaf size={10} /> Sanctuary Awaits
+        <section className="relative py-24 md:py-32 overflow-hidden bg-[#FBFBF9]">
+            {/* --- NATURAL TEXTURE OVERLAY --- */}
+            <div className="absolute inset-0 opacity-[0.03] pointer-events-none mix-blend-multiply" 
+                 style={{ backgroundImage: `url('https://www.transparenttextures.com/patterns/natural-paper.png')` }}></div>
+
+            <div className="relative z-10 container mx-auto px-6 lg:px-20">
+                
+                {/* --- SECTION HEADER --- */}
+                <div className="max-w-3xl mb-20" data-aos="fade-right">
+                    <div className="flex items-center gap-4 mb-6">
+                        <div className="h-[1px] w-12 bg-[#78936D]"></div>
+                        <span className="text-[#78936D] uppercase tracking-[0.4em] text-[10px] font-black">
+                            Artisanal Living
                         </span>
-                        <span className="h-px w-8 bg-emerald-700/30"></span>
                     </div>
                     
-                    <h2 className="text-stone-950 text-4xl md:text-5xl lg:text-6xl font-serif tracking-tight leading-tight mb-4">
-                        Discover Your <span className="italic font-light text-emerald-700">Private</span> Oasis
+                    <h2 className="text-[#2D3629] text-5xl md:text-7xl font-serif leading-[1.1] mb-8">
+                        Our <span className="italic font-light text-[#78936D]">Eco-Crafted</span> <br /> 
+                        Sanctuaries
                     </h2>
                     
-                    <p className="text-stone-700 max-w-lg mx-auto text-base font-light leading-relaxed">
-                        Thoughtfully designed to blend with the surrounding rainforest.
+                    <p className="text-[#5B6356] text-lg font-sans font-light leading-relaxed max-w-xl italic border-l-2 border-[#78936D]/20 pl-6">
+                        "Ekhane thaka mane prokritir buke fire jaoa. Protiti cottage toiri hoyeche local mud, bamboo, ebong forest wood diye."
                     </p>
                 </div>
 
                 {loading ? (
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-6 lg:gap-8">
-                        {[...Array(4)].map((_, i) => <SkeletonCard key={i} />)}
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
+                        {[...Array(4)].map((_, i) => (
+                            <div key={i} className="h-[500px] bg-stone-100 rounded-[40px] animate-pulse"></div>
+                        ))}
                     </div>
-                ) : error ? (
-                    <div className="text-center py-16 bg-white rounded-3xl border border-red-100 shadow-sm">
-                        <p className="text-stone-800 font-medium">{error}</p>
-                    </div>
-                ) : displayRooms.length === 0 ? (
-                    <div className="text-center py-16 text-stone-600">No rooms available currently.</div>
                 ) : (
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-6 lg:gap-8">
-                        {displayRooms.map((room) => (
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-x-12 gap-y-20">
+                        {displayRooms.map((room, index) => (
                             <motion.div 
                                 key={room._id}
                                 initial="hidden"
                                 whileInView="visible"
                                 viewport={{ once: true, amount: 0.1 }}
                                 variants={cardVariants}
-                                whileHover={{ y: -8, boxShadow: "0 20px 40px -15px rgba(0, 0, 0, 0.1)" }}
-                                className="group relative bg-white rounded-3xl p-5 shadow-lg shadow-stone-200/50 border border-stone-100 flex flex-col transition-all duration-300"
+                                className={`group relative flex flex-col ${index % 2 !== 0 ? 'md:mt-16' : ''}`}
                             >
-                                <div className="relative rounded-2xl overflow-hidden aspect-[16/10] mb-6">
-                                    {/* --- UPDATED IMAGE RENDERING --- */}
+                                {/* IMAGE CONTAINER WITH ASYMMETRICAL MASK */}
+                                <div className="relative mb-8 overflow-hidden rounded-[40px_15px_60px_20px] shadow-2xl transition-all duration-700 group-hover:shadow-[#4A5D43]/10">
                                     <img 
-                                        src={room.image && room.image.length > 0 ? room.image[0] : '/placeholder.jpg'} // প্রথম ছবিটি ব্যবহার করুন
+                                        src={room.image?.[0] || '/placeholder.jpg'} 
                                         alt={room.title} 
-                                        className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
-                                        loading="lazy"
+                                        className="w-full h-[400px] md:h-[500px] object-cover transition-transform duration-1000 scale-[1.02] group-hover:scale-110"
                                     />
                                     
-                                    <div className="absolute top-4 left-4 bg-white/60 backdrop-blur-md border border-white/30 px-4 py-2 rounded-xl shadow-inner">
-                                        <div className="text-stone-950 text-lg md:text-xl font-serif flex items-center gap-1">
-                                            <FaDollarSign size={14} className="text-emerald-700" />
-                                            {room.price}<span className="text-xs font-sans text-stone-700 font-medium">/night</span>
-                                        </div>
+                                    {/* PRICE TAG (RAW STYLE) */}
+                                    <div className="absolute top-6 left-6 bg-white/90 backdrop-blur-md px-5 py-2 rounded-2xl shadow-lg border border-white/50">
+                                        <p className="text-[#2D3629] font-serif italic text-xl">
+                                            ${room.price}<span className="text-[10px] uppercase tracking-tighter not-italic font-bold opacity-60">/night</span>
+                                        </p>
+                                    </div>
+
+                                    {/* CATEGORY OVERLAY */}
+                                    <div className="absolute bottom-6 right-6 bg-[#2D3629]/80 backdrop-blur-sm text-[#FBFBF9] px-4 py-1.5 rounded-full text-[9px] uppercase tracking-[0.3em] font-bold">
+                                        {room.category || 'Forest Suite'}
                                     </div>
                                 </div>
 
-                                <div className="flex-1 flex flex-col">
-                                    <div className="flex justify-between items-center mb-3">
-                                        <div className="bg-emerald-50 text-emerald-800 text-[9px] uppercase tracking-[0.2em] font-bold px-3 py-1 rounded-full">
-                                            {room.category || 'Suite'}
-                                        </div>
-                                        <div className="flex gap-2 text-stone-400 text-sm">
-                                            <FaWind title="Air Conditioning" /> <FaUsers title="Capacity" />
-                                        </div>
-                                    </div>
-                                    
-                                    <h3 className="text-stone-950 text-2xl font-serif tracking-tight mb-2 group-hover:text-emerald-700 transition-colors">
+                                {/* CONTENT AREA */}
+                                <div className="px-2">
+                                    <h3 className="text-[#2D3629] text-3xl md:text-4xl font-serif mb-4 group-hover:text-[#78936D] transition-colors">
                                         {room.title}
                                     </h3>
                                     
-                                    <p className="text-stone-600 text-sm leading-relaxed font-light mb-6 flex-1 line-clamp-2">
+                                    <p className="text-[#5B6356] text-sm md:text-base leading-relaxed font-sans font-light mb-8 line-clamp-2">
                                         {room.description}
                                     </p>
 
-                                    <div className="flex items-center gap-6 pb-6 border-b border-stone-100 mb-6 text-stone-500 text-xs font-medium">
-                                        <div className="flex items-center gap-2">
-                                            <FaUsers className="text-emerald-600" />
-                                            {/* 'maxOccupancy' এর ডাটা স্ট্রাকচার চেক করুন, এখানে room.maxOccupancy?.adults ব্যবহার করা হয়েছে */}
-                                            <span>Up to {(room.maxOccupancy?.adults || 0) + (room.maxOccupancy?.children || 0)} Guests</span>
+                                    {/* NATURAL FEATURES GRID */}
+                                    <div className="flex items-center gap-8 py-6 border-y border-[#2D3629]/5 mb-8">
+                                        <div className="flex items-center gap-3">
+                                            <FaUsers className="text-[#78936D] text-sm" />
+                                            <span className="text-[10px] uppercase tracking-widest font-black text-[#2D3629]/60">
+                                                {(room.maxOccupancy?.adults || 0) + (room.maxOccupancy?.children || 0)} Guests
+                                            </span>
                                         </div>
-                                        <div className="flex items-center gap-2">
-                                            <FaBed className="text-emerald-600" />
-                                            <span>{room.bedType || 'King Bed'}</span>
+                                        <div className="flex items-center gap-3">
+                                            <FaBed className="text-[#78936D] text-sm" />
+                                            <span className="text-[10px] uppercase tracking-widest font-black text-[#2D3629]/60">
+                                                {room.bedType || 'King Size'}
+                                            </span>
                                         </div>
                                     </div>
-                                    
+
                                     <Link 
                                         to={`/room/${room.slug || room._id}`}
-                                        className="group/btn inline-flex items-center gap-2 text-emerald-800 font-semibold text-xs mt-auto hover:text-emerald-600"
+                                        className="inline-flex items-center gap-4 text-[#2D3629] font-black text-[11px] uppercase tracking-[0.3em] group/btn"
                                     >
-                                        Explore Room Details
-                                        <FaArrowRight className="transition-transform duration-300 group-hover/btn:translate-x-1" />
+                                        Explore Ethics & Details
+                                        <span className="w-10 h-[1px] bg-[#2D3629] transition-all duration-300 group-hover/btn:w-16 group-hover/btn:bg-[#78936D]"></span>
                                     </Link>
                                 </div>
                             </motion.div>
@@ -160,16 +139,25 @@ const Accommodation = () => {
                     </div>
                 )}
 
-                <div className="mt-20 text-center" data-aos="fade-up">
+                {/* --- FOOTER CTA --- */}
+                <div className="mt-32 text-center" data-aos="fade-up">
                     <Link 
                         to="/all-rooms" 
-                        className="group inline-flex items-center gap-3 bg-emerald-700 text-white px-8 py-3 rounded-full text-xs font-bold uppercase tracking-[0.2em] hover:bg-emerald-800 transition-all shadow-lg shadow-emerald-500/20"
+                        className="group relative inline-flex items-center gap-4 bg-[#2D3629] text-[#FBFBF9] px-12 py-6 rounded-none font-sans text-[11px] font-bold uppercase tracking-[0.4em] overflow-hidden transition-all shadow-2xl hover:bg-[#3A4535]"
                     >
-                        View All Escapes
-                        <FaArrowRight size={10} />
+                        <span className="relative z-10">All Accommodations</span>
+                        <FaArrowRight className="relative z-10 text-[10px] transition-transform group-hover:translate-x-2" />
                     </Link>
+                    <p className="mt-8 text-[#5B6356] text-[10px] uppercase tracking-[0.5em] font-bold opacity-40 italic">
+                        — Every stay plants a tree —
+                    </p>
                 </div>
             </div>
+
+            <style jsx>{`
+                .font-serif { font-family: 'Playfair Display', serif; }
+                .font-sans { font-family: 'Plus Jakarta Sans', sans-serif; }
+            `}</style>
         </section>
     );
 };
