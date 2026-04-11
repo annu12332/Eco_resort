@@ -1,10 +1,8 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-// Icons stay the same, colors will be adjusted
-import { Leaf, Droplets, Utensils, Mountain, Wifi, Wind } from 'lucide-react';
+import { Leaf, Droplets, Utensils, Mountain, Wifi, Wind, Sprout } from 'lucide-react';
 
 const Facilities = () => {
-    // Updated facility list to fit Eco-Resort concept
     const facilityList = [
         { icon: <Leaf size={18} />, title: "Eco-Friendly Design", desc: "Sustainable materials used." },
         { icon: <Droplets size={18} />, title: "Rainforest Spa", desc: "Organic treatments & rituals." },
@@ -14,84 +12,76 @@ const Facilities = () => {
         { icon: <Wifi size={18} />, title: "Digital Detox", desc: "Limited Wi-Fi, full immersion." },
     ];
 
-    // Images to reflect jungle/eco vibe
     const images = [
-        "https://images.unsplash.com/photo-1760638262320-f80336f8da20?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTl8fGVjbyUyMHJlc29ydHxlbnwwfHwwfHx8MA%3D%3D", // Eco resort view
-        "https://plus.unsplash.com/premium_photo-1682285210821-5d1b5a406b97?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTd8fGVjbyUyMHJlc29ydHxlbnwwfHwwfHx8MA%3D%3D", // Tropical plants
-        "https://images.unsplash.com/photo-1760942994028-faea27e67045?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTh8fGVjbyUyMHJlc29ydHxlbnwwfHwwfHx8MA%3D%3D", // Zen/Spa
-        "https://images.unsplash.com/photo-1760942994028-faea27e67045?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTh8fGVjbyUyMHJlc29ydHxlbnwwfHwwfHx8MA%3D%3D", // Cozy interior
+        "https://images.unsplash.com/photo-1540541338287-41700207dee6?q=80&w=2070&auto=format&fit=crop",
+        "https://images.unsplash.com/photo-1512100356956-c1227c331e0c?q=80&w=1964&auto=format&fit=crop",
+        "https://images.unsplash.com/photo-1544161515-4af6b1d8656b?q=80&w=2070&auto=format&fit=crop",
     ];
 
     return (
-        // LIGHT THEME: bg-stone-50, text-stone-900
-        <section className="relative py-24 bg-stone-50 text-stone-900 overflow-hidden px-6">
-            {/* Background Glows - Softened for Light Theme */}
-            <div className="absolute top-0 left-1/3 w-96 h-96 bg-emerald-100 blur-[120px] rounded-full opacity-60" />
-            <div className="absolute bottom-0 right-1/4 w-80 h-80 bg-stone-200 blur-[100px] rounded-full opacity-60" />
+        <section className="relative py-24 bg-[#f0f4ee] overflow-hidden px-6">
+            <div className="absolute inset-0 opacity-20 pointer-events-none" 
+                 style={{ backgroundImage: `url('https://www.transparenttextures.com/patterns/natural-paper.png')` }}></div>
             
-            <div className="max-w-6xl mx-auto relative z-10">
-                
-                {/* --- Header --- */}
-                <div className="text-center mb-20">
-                    <motion.p 
-                        initial={{ opacity: 0 }}
-                        whileInView={{ opacity: 1 }}
-                        // DARKER GREEN FOR LIGHT THEME
-                        className="text-emerald-700 text-[10px] font-bold tracking-[0.5em] uppercase mb-3"
-                    >
-                        Conscious Living
-                    </motion.p>
-                    <motion.h2 
-                        initial={{ opacity: 0, y: 15 }}
+            <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-[#cbdcc1] rounded-full blur-[150px] opacity-40 -translate-y-1/2"></div>
+            <div className="absolute bottom-0 left-0 w-[400px] h-[400px] bg-[#a3b899] rounded-full blur-[150px] opacity-30"></div>
+
+            <div className="max-w-7xl mx-auto relative z-10">
+                <div className="flex flex-col items-center text-center mb-16">
+                    <motion.div 
+                        initial={{ opacity: 0, y: 10 }}
                         whileInView={{ opacity: 1, y: 0 }}
-                        // DARK TEXT FOR HEADLINE
-                        className="text-4xl md:text-5xl font-serif text-stone-950 italic"
+                        className="flex items-center gap-2 bg-[#4a5d43]/10 px-4 py-1 rounded-full mb-4 border border-[#4a5d43]/10"
                     >
-                        Resort <span className='text-emerald-700/90'>Amenities</span>
-                    </motion.h2>
+                        <Sprout className="text-[#4a5d43]" size={14} />
+                        <span className="text-[#4a5d43] uppercase tracking-[0.4em] text-[10px] font-black">Sustainable Luxury</span>
+                    </motion.div>
+                    
+                    <h2 className="text-[#2d3629] text-5xl md:text-7xl font-serif leading-none mb-6">
+                        Pure <span className="text-[#78936d] italic font-light">Amenities</span>
+                    </h2>
                 </div>
 
-                <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-center">
-                    
-                    {/* LEFT: Compact Bento Gallery */}
-                    <div className="lg:col-span-6 grid grid-cols-6 grid-rows-5 gap-3 h-[400px] md:h-[500px]">
-                        <div className="col-span-4 row-span-3 rounded-2xl overflow-hidden border border-stone-100 shadow-xl shadow-stone-100">
-                            <img src={images[0]} className="w-full h-full object-cover hover:scale-105 transition-all duration-700" alt="Resort" />
-                        </div>
-                        <div className="col-span-2 row-span-2 rounded-2xl overflow-hidden border border-stone-100 shadow-md">
-                            <img src={images[1]} className="w-full h-full object-cover" alt="Tropical plants" />
-                        </div>
-                        <div className="col-span-2 row-span-3 rounded-2xl overflow-hidden border border-stone-100 shadow-md">
+                <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+                    <div className="lg:col-span-5 grid grid-cols-2 gap-4 h-[500px]">
+                        <motion.div 
+                            whileHover={{ scale: 1.02 }}
+                            className="col-span-2 h-[280px] rounded-[4rem_1rem] overflow-hidden border-4 border-white shadow-2xl"
+                        >
+                            <img src={images[0]} className="w-full h-full object-cover" alt="Resort" />
+                        </motion.div>
+                        <motion.div 
+                            whileHover={{ scale: 1.02 }}
+                            className="rounded-[1rem_1rem_1rem_4rem] overflow-hidden border-4 border-white shadow-xl"
+                        >
+                            <img src={images[1]} className="w-full h-full object-cover" alt="Tropical" />
+                        </motion.div>
+                        <motion.div 
+                            whileHover={{ scale: 1.02 }}
+                            className="rounded-[1rem_3rem_1rem_1rem] overflow-hidden border-4 border-white shadow-xl"
+                        >
                             <img src={images[2]} className="w-full h-full object-cover" alt="Spa" />
-                        </div>
-                        {/* Light Cream Placeholder */}
-                        <div className="col-span-4 row-span-2 bg-stone-100 rounded-2xl border border-stone-200 flex items-center justify-center">
-                            <span className="text-emerald-800/60 font-serif italic text-lg tracking-widest uppercase">Pure Nature</span>
-                        </div>
+                        </motion.div>
                     </div>
 
-                    {/* RIGHT: List */}
-                    <div className="lg:col-span-6 grid grid-cols-2 gap-3 md:gap-4">
+                    <div className="lg:col-span-7 grid grid-cols-1 sm:grid-cols-2 gap-4 md:gap-6">
                         {facilityList.map((item, index) => (
                             <motion.div
                                 key={index}
-                                initial={{ opacity: 0, y: 20 }}
-                                whileInView={{ opacity: 1, y: 0 }}
-                                transition={{ delay: index * 0.05 }}
-                                // LIGHT CARDS, SUBTLE BORDERS
-                                className="group p-5 bg-white rounded-2xl border border-stone-100 hover:border-emerald-200 hover:shadow-lg hover:shadow-emerald-50 transition-all duration-500"
+                                initial={{ opacity: 0, x: 20 }}
+                                whileInView={{ opacity: 1, x: 0 }}
+                                transition={{ delay: index * 0.1 }}
+                                className="group p-6 bg-[#dbe4d5]/40 backdrop-blur-sm rounded-[2rem_0.5rem] border border-white/50 hover:bg-[#2d3629] transition-all duration-500 hover:shadow-2xl hover:shadow-[#2d3629]/20"
                             >
-                                <div className="flex flex-col gap-4">
-                                    {/* ICON BG AND COLOR */}
-                                    <div className="w-10 h-10 rounded-xl bg-emerald-50 flex items-center justify-center text-emerald-600 group-hover:bg-emerald-600 group-hover:text-white transition-all">
+                                <div className="flex items-start gap-5">
+                                    <div className="w-12 h-12 rounded-2xl bg-[#f0f4ee] flex items-center justify-center text-[#4a5d43] group-hover:bg-[#78936d] group-hover:text-white transition-all duration-500 shadow-sm">
                                         {item.icon}
                                     </div>
-                                    <div>
-                                        {/* TEXT COLORS */}
-                                        <h4 className="text-stone-950 font-serif text-sm md:text-base group-hover:text-emerald-700 transition-colors">
+                                    <div className="flex-1">
+                                        <h4 className="text-[#2d3629] font-serif text-lg group-hover:text-[#f0f4ee] transition-colors mb-1">
                                             {item.title}
                                         </h4>
-                                        <p className="text-stone-600 text-[10px] md:text-xs mt-1 leading-relaxed line-clamp-2">
+                                        <p className="text-[#5b6356] text-xs leading-relaxed group-hover:text-[#f0f4ee]/70 transition-colors">
                                             {item.desc}
                                         </p>
                                     </div>
@@ -99,9 +89,20 @@ const Facilities = () => {
                             </motion.div>
                         ))}
                     </div>
+                </div>
 
+                <div className="mt-20 flex justify-center opacity-30">
+                    <div className="flex items-center gap-6">
+                        <div className="h-[1px] w-24 bg-[#2d3629]"></div>
+                        <Leaf size={24} className="text-[#2d3629]" />
+                        <div className="h-[1px] w-24 bg-[#2d3629]"></div>
+                    </div>
                 </div>
             </div>
+
+            <style jsx>{`
+                .font-serif { font-family: 'Playfair Display', serif; }
+            `}</style>
         </section>
     );
 };

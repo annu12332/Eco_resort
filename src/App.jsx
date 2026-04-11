@@ -9,7 +9,6 @@ import BackgroundAnimator from './components/BackgroundAnimator';
 import Accommodation from './components/Accommodation';
 import Banner from './components/Banner';
 import BookingBar from './components/BookingBar';
-import ExtraFacilities from './components/ExtraFacilites';
 import Facilities from './components/Facilities';
 import HeroSection from './components/HeroSection';
 import Footer from './components/Footer';
@@ -83,7 +82,6 @@ function App() {
               <Accommodation />
               <Experience />
               <Facilities />
-              <ExtraFacilities />
               <BookingBar />
               <Gallery />
             </>
