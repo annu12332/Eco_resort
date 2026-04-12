@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
 
 const Hero = () => {
   const [isLoaded, setIsLoaded] = useState(false);
@@ -50,12 +51,12 @@ const Hero = () => {
                 </div>
 
                 <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
-                  <button className="w-full sm:w-auto bg-[#F2F0D0] text-[#3A6332] px-10 py-4 rounded-2xl font-sans text-xs font-black uppercase tracking-widest hover:bg-[#3A6332] hover:text-[#F2F0D0] transition-all duration-300 shadow-lg active:scale-95">
+                  <Link to={"/reservation"}><button className="w-full sm:w-auto bg-[#F2F0D0] text-[#3A6332] px-10 py-4 rounded-2xl font-sans text-xs font-black uppercase tracking-widest hover:bg-[#3A6332] hover:text-[#F2F0D0] transition-all duration-300 shadow-lg active:scale-95">
                     Book Retreat
-                  </button>
-                  <button className="w-full sm:w-auto bg-[#3A6332]/40 backdrop-blur-md border border-white/20 text-[#F2F0D0] px-10 py-4 rounded-2xl font-sans text-xs font-bold uppercase tracking-widest hover:bg-[#3A6332]/60 transition-all duration-300">
+                  </button></Link>
+                  <Link to={"/all-rooms"}><button className="w-full sm:w-auto bg-[#3A6332]/40 backdrop-blur-md border border-white/20 text-[#F2F0D0] px-10 py-4 rounded-2xl font-sans text-xs font-bold uppercase tracking-widest hover:bg-[#3A6332]/60 transition-all duration-300">
                     View Escape
-                  </button>
+                  </button></Link>
                 </div>
               </div>
             </div>

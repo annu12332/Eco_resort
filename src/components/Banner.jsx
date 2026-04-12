@@ -100,7 +100,7 @@ const EcoPremiumBanner = () => {
                   Explore Our Ethics
                 </motion.button>
                 
-                <Link to="/rooms" className="text-[#3A6332] font-bold text-xs uppercase tracking-widest border-b-2 border-[#78A370] pb-1 hover:text-[#78A370] transition-colors">
+                <Link to="/all-rooms" className="text-[#3A6332] font-bold text-xs uppercase tracking-widest border-b-2 border-[#78A370] pb-1 hover:text-[#78A370] transition-colors">
                   View Cottages
                 </Link>
               </div>
