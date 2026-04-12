@@ -5,23 +5,19 @@ import { Link } from 'react-router-dom';
 import axios from 'axios';
 
 const Activities = () => {
-    // 1. ADDED: State to manage activities data
     const [allActivities, setAllActivities] = useState([]);
     const [loading, setLoading] = useState(true);
 
     const API_URL = import.meta.env.VITE_API_BASE_URL || 'https://eco-resort-server.onrender.com';
 
-    // 2. ADDED: Fetch data from backend
     useEffect(() => {
         const fetchActivities = async () => {
             try {
                 const res = await axios.get(`${API_URL}/api/activities`);
-                // Backend data mapping to match UI structure
                 const formattedData = res.data.map((act, index) => ({
                     title: act.title,
                     desc: act.description,
                     image: act.image,
-                    // Dynamic span for layout (alternating grid)
                     span: index % 3 === 0 ? "md:col-span-2" : "md:col-span-1"
                 }));
                 setAllActivities(formattedData);
@@ -37,12 +33,12 @@ const Activities = () => {
 
     if (loading) return (
         <div className="h-96 flex items-center justify-center">
-            <Loader2 className="animate-spin text-emerald-500" size={40} />
+            <Loader2 className="animate-spin text-[#3A6332]" size={40} />
         </div>
     );
 
     return (
-        <section className="py-24 bg-transparent px-6 overflow-hidden">
+        <section className="py-24 bg-[#F2F0D0] px-6 overflow-hidden">
             <div className="max-w-6xl mx-auto">
                 
                 {/* --- Header Section --- */}
@@ -51,7 +47,7 @@ const Activities = () => {
                         initial={{ opacity: 0, y: 10 }}
                         whileInView={{ opacity: 1, y: 0 }}
                         viewport={{ once: true }}
-                        className="inline-flex items-center gap-2 bg-emerald-950/40 border border-emerald-700/30 text-emerald-300 px-4 py-1.5 rounded-full text-xs font-medium mb-4"
+                        className="inline-flex items-center gap-2 bg-[#3A6332]/10 border border-[#3A6332]/20 text-[#3A6332] px-4 py-1.5 rounded-full text-xs font-bold uppercase tracking-widest mb-4"
                     >
                         <Sparkles size={14} />
                         Curated Experiences
@@ -61,9 +57,9 @@ const Activities = () => {
                         initial={{ opacity: 0, y: 15 }}
                         whileInView={{ opacity: 1, y: 0 }}
                         viewport={{ once: true }}
-                        className="text-5xl md:text-6xl font-serif text-white italic mb-6 leading-tight"
+                        className="text-5xl md:text-6xl font-serif text-[#3A6332] italic mb-6 leading-tight"
                     >
-                        Explore the <span className='text-emerald-300/90'>Wilderness</span>
+                        Explore the <span className='text-[#78A370]'>Wilderness</span>
                     </motion.h2>
                     
                     <motion.p 
@@ -71,7 +67,7 @@ const Activities = () => {
                         whileInView={{ opacity: 1 }}
                         viewport={{ once: true }}
                         transition={{ delay: 0.2 }}
-                        className="text-stone-300/80 text-lg md:text-xl font-light"
+                        className="text-[#2D3629]/70 text-lg md:text-xl font-sans font-light italic"
                     >
                         Disconnect from the rush and reconnect with nature through our tailored adventure and relaxation activities.
                     </motion.p>
@@ -86,7 +82,7 @@ const Activities = () => {
                             whileInView={{ opacity: 1, y: 0 }}
                             viewport={{ once: true }}
                             transition={{ duration: 0.6, delay: index * 0.05 }}
-                            className={`${activity.span} group relative rounded-[2rem] overflow-hidden border border-white/5 bg-white/[0.03] backdrop-blur-xl h-[300px] md:h-[350px] hover:border-emerald-500/30 transition-all duration-500`}
+                            className={`${activity.span} group relative rounded-[2.5rem] overflow-hidden border border-[#A3C999]/30 bg-white shadow-sm h-[300px] md:h-[350px] hover:shadow-xl transition-all duration-500`}
                         >
                             {/* Image */}
                             <img 
@@ -96,14 +92,14 @@ const Activities = () => {
                             />
                             
                             {/* Gradient Overlay */}
-                            <div className="absolute inset-0 bg-gradient-to-t from-stone-950 via-stone-950/40 to-transparent" />
+                            <div className="absolute inset-0 bg-gradient-to-t from-[#2D3629]/90 via-[#2D3629]/20 to-transparent" />
                             
                             {/* Content */}
                             <div className="absolute bottom-0 left-0 p-8 w-full">
-                                <h3 className="text-white font-serif text-2xl md:text-3xl mb-3 group-hover:text-emerald-300 transition-colors">
+                                <h3 className="text-[#F2F0D0] font-serif text-2xl md:text-3xl mb-3 group-hover:text-[#A3C999] transition-colors">
                                     {activity.title}
                                 </h3>
-                                <p className="text-white/60 text-sm md:text-base max-w-sm group-hover:text-white/80 transition-colors line-clamp-2">
+                                <p className="text-[#F2F0D0]/80 text-sm md:text-base max-w-sm group-hover:text-white transition-colors line-clamp-2 font-light">
                                     {activity.desc}
                                 </p>
                             </div>
@@ -116,7 +112,7 @@ const Activities = () => {
                     <motion.button
                         whileHover={{ scale: 1.05 }}
                         whileTap={{ scale: 0.95 }}
-                        className="inline-flex items-center gap-3 bg-white/5 hover:bg-white/10 text-white border border-white/10 px-8 py-4 rounded-full text-sm font-semibold transition-all duration-300 group"
+                        className="inline-flex items-center gap-3 bg-[#3A6332] text-[#F2F0D0] px-10 py-5 rounded-full text-xs font-bold uppercase tracking-[0.2em] shadow-[0_20px_40px_rgba(58,99,50,0.2)] transition-all duration-300 group"
                     >
                         View All Activities
                         <ArrowRight size={18} className="group-hover:translate-x-1 transition-transform" />
