@@ -23,22 +23,22 @@ const Navbar = () => {
 
     return (
         <>
-            <nav className={`fixed w-full z-[100] transition-all duration-700 ease-in-out px-4 md:px-10 ${scrolled ? 'top-0 py-3' : 'top-4 md:top-6 py-0'}`}>
-                <div className={`max-w-7xl mx-auto px-8 py-5 flex justify-between items-center transition-all duration-500 border border-white/40 ${scrolled ? 'bg-white/70 backdrop-blur-2xl shadow-xl rounded-xl' : 'bg-white/40 backdrop-blur-md rounded-[24px] shadow-lg'}`}>
+            <nav className={`fixed w-full z-[100] transition-all duration-700 ease-in-out px-4 md:px-10 ${scrolled ? 'top-0 py-2' : 'top-3 md:top-6 py-0'}`}>
+                <div className={`max-w-7xl mx-auto px-5 md:px-8 py-3 md:py-4 flex justify-between items-center transition-all duration-500 border border-white/40 ${scrolled ? 'bg-white/80 backdrop-blur-2xl shadow-xl rounded-xl' : 'bg-white/40 backdrop-blur-md rounded-[20px] shadow-lg'}`}>
                     
                     <Link to="/" className="relative z-[110]">
-                        <h1 className="text-2xl md:text-3xl font-serif tracking-tighter text-stone-900">
+                        <h1 className="text-xl md:text-2xl font-serif tracking-tighter text-stone-900 leading-none">
                             Almaris<span className="text-[#78936D] italic font-bold">Eco</span>
                         </h1>
-                        <div className="h-[2px] w-10 bg-[#78936D] mt-[-2px]"></div>
+                        <div className="h-[1.5px] w-8 bg-[#78936D] mt-0.5"></div>
                     </Link>
 
-                    <div className="hidden lg:flex items-center space-x-12">
+                    <div className="hidden lg:flex items-center space-x-10">
                         {navLinks.map((link) => (
                             <Link
                                 key={link.name}
                                 to={link.href}
-                                className="text-[13px] font-bold uppercase tracking-[0.2em] text-stone-900 hover:text-[#78936D] transition-all relative group"
+                                className="text-[12px] font-bold uppercase tracking-[0.2em] text-stone-900 hover:text-[#78936D] transition-all relative group"
                             >
                                 {link.name}
                                 <span className="absolute -bottom-1 left-0 w-0 h-[2px] bg-[#78936D] transition-all duration-300 group-hover:w-full" />
@@ -46,18 +46,18 @@ const Navbar = () => {
                         ))}
                     </div>
 
-                    <div className="flex items-center gap-6">
+                    <div className="flex items-center gap-4">
                         <Link to="/reservation" className="hidden sm:block">
-                            <button className="bg-[#78936D]/90 backdrop-blur-sm text-white px-8 py-3 rounded-xl text-[12px] font-bold uppercase tracking-widest hover:bg-stone-800 transition-all shadow-lg active:scale-95 border border-white/20">
+                            <button className="bg-[#78936D]/90 backdrop-blur-sm text-white px-6 py-2.5 rounded-lg text-[11px] font-bold uppercase tracking-widest hover:bg-stone-800 transition-all shadow-md active:scale-95 border border-white/20">
                                 Book Now
                             </button>
                         </Link>
 
                         <button
                             onClick={() => setIsOpen(true)}
-                            className="lg:hidden p-3 bg-white/50 backdrop-blur-md rounded-xl text-stone-900 border border-white/50 shadow-sm"
+                            className="lg:hidden p-2 bg-white/60 backdrop-blur-md rounded-lg text-stone-900 border border-white/50 shadow-sm active:scale-90 transition-transform"
                         >
-                            <HiMenuAlt3 className="text-3xl" />
+                            <HiMenuAlt3 className="text-2xl" />
                         </button>
                     </div>
                 </div>
@@ -77,50 +77,50 @@ const Navbar = () => {
                                 initial={{ x: '100%' }}
                                 animate={{ x: 0 }}
                                 exit={{ x: '100%' }}
-                                transition={{ type: 'spring', damping: 25, stiffness: 200 }}
-                                className="fixed right-0 top-0 h-screen w-[300px] sm:w-[400px] bg-white/80 backdrop-blur-2xl z-[130] flex flex-col shadow-[-20px_0_50px_rgba(0,0,0,0.1)] border-l border-white/50"
+                                transition={{ type: 'spring', damping: 30, stiffness: 300 }}
+                                className="fixed right-0 top-0 h-screen w-[260px] sm:w-[320px] bg-white/95 backdrop-blur-2xl z-[130] flex flex-col shadow-2xl border-l border-white/50"
                             >
-                                <div className="p-10 flex justify-end">
+                                <div className="p-6 flex justify-end">
                                     <button 
                                         onClick={() => setIsOpen(false)}
-                                        className="p-4 bg-stone-100 rounded-full text-stone-800 hover:bg-[#78936D] hover:text-white transition-all shadow-inner"
+                                        className="p-3 bg-stone-100 rounded-full text-stone-800 hover:bg-[#78936D] hover:text-white transition-all"
                                     >
-                                        <HiX className="text-2xl" />
+                                        <HiX className="text-xl" />
                                     </button>
                                 </div>
 
-                                <div className="flex flex-col space-y-8 px-12 pt-10">
+                                <div className="flex flex-col space-y-6 px-10 pt-4">
                                     {navLinks.map((link, index) => (
                                         <motion.div
                                             key={link.name}
-                                            initial={{ opacity: 0, x: 20 }}
+                                            initial={{ opacity: 0, x: 15 }}
                                             animate={{ opacity: 1, x: 0 }}
-                                            transition={{ delay: index * 0.1 }}
+                                            transition={{ delay: index * 0.08 }}
                                         >
                                             <Link
                                                 to={link.href}
                                                 onClick={() => setIsOpen(false)}
-                                                className="text-4xl font-serif text-stone-800 hover:text-[#78936D] transition-colors italic block"
+                                                className="text-2xl font-serif text-stone-800 hover:text-[#78936D] transition-colors italic block"
                                             >
                                                 {link.name}
                                             </Link>
                                         </motion.div>
                                     ))}
                                     
-                                    <div className="pt-12">
+                                    <div className="pt-8">
                                         <Link to="/reservation" onClick={() => setIsOpen(false)}>
-                                            <button className="w-full bg-[#78936D] text-white py-5 rounded-xl text-sm font-bold uppercase tracking-widest shadow-xl shadow-emerald-900/20 active:scale-95 transition-transform border border-white/20">
+                                            <button className="w-full bg-[#78936D] text-white py-4 rounded-xl text-xs font-bold uppercase tracking-widest shadow-lg active:scale-95 transition-transform">
                                                 Check Availability
                                             </button>
                                         </Link>
                                     </div>
                                 </div>
 
-                                <div className="mt-auto p-12 border-t border-stone-200/50 bg-white/30">
-                                    <p className="text-[11px] uppercase tracking-[0.4em] text-stone-400 font-bold mb-6">Connect With Us</p>
-                                    <div className="flex gap-8 text-stone-800">
-                                        <span className="hover:text-[#78936D] cursor-pointer font-bold text-xs tracking-tighter">INSTAGRAM</span>
-                                        <span className="hover:text-[#78936D] cursor-pointer font-bold text-xs tracking-tighter">FACEBOOK</span>
+                                <div className="mt-auto p-10 border-t border-stone-200/50">
+                                    <p className="text-[10px] uppercase tracking-[0.3em] text-stone-400 font-bold mb-5">Connect</p>
+                                    <div className="flex flex-col gap-4 text-stone-800">
+                                        <span className="hover:text-[#78936D] cursor-pointer font-bold text-[10px] tracking-widest transition-colors">INSTAGRAM</span>
+                                        <span className="hover:text-[#78936D] cursor-pointer font-bold text-[10px] tracking-widest transition-colors">FACEBOOK</span>
                                     </div>
                                 </div>
                             </motion.div>
